@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/09 21:52:21 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:07:24 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,23 @@
 # define SO_LONG_H
 
 # include "libft.h"
+# include <mlx.h>
 # include <math.h>
 
-//
+typedef struct s_player
+{
+	/*data*/
+}	t_player;
+
+typedef struct s_map
+{
+	/* data */
+}	t_map;
+
+typedef struct s_game
+{
+	t_player	*player;
+	t_map		*map;
+}	t_game;
 
 #endif
