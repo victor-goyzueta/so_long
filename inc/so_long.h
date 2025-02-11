@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/10 18:07:24 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:13:43 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	/* data */
+	char	**matrix;
 }	t_map;
 
 typedef struct s_game
@@ -32,5 +32,10 @@ typedef struct s_game
 	t_player	*player;
 	t_map		*map;
 }	t_game;
+
+void	validate_arguments(int argc, char **argv);
+void	check_map(char *file);
+/*allocate mem*/
+void	allocate_map(char *file, t_map *map);
 
 #endif
