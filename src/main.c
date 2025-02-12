@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/11 18:54:22 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:55:09 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	validate_arguments(int argc, char **argv)
 }
 
 int	main(int argc, char **argv)
-{
-	t_game	*game;
-
-	game = NULL;	
+{	
 	validate_arguments(argc, argv);
-	init(game);
 }

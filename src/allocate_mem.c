@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/11 21:14:27 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:56:32 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	allocate_map(char *file, t_map *map)
 	char	*add;
 
 	fd = open(file, O_RDONLY);
-	if (fd < 0);
+	if (fd < 0)
 		exit(EXIT_FAILURE);
 	line = get_next_line(fd);
 	if (!line)

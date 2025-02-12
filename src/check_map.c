@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/11 21:44:56 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:56:16 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	check_map_format(char *file)
 {
-	int	len;
+	size_t	len;
 
 	len = 0;
 	if (!file || !*file)
 		exit(EXIT_FAILURE);
-	len = ft_strlen;
+	len = ft_strlen(file);
 	if (ft_strncmp(file + (len - 4), ".ber", 4) != 0) //manage hide file
 		exit(EXIT_FAILURE);
 }
@@ -27,18 +27,18 @@ static void	check_map_format(char *file)
 static void	check_map_rectangular(t_map *map)
 {
 	int	i;
-	int	current;
-	int	compared;
+	size_t	current;
+	size_t	compared;
 
 	i = 0;
 	current = ft_strlen(map->matrix[i]);
-	while (map->matrix[i + 1])
+	while (map->matrix[i++])
 	{
 		compared = ft_strlen(map->matrix[i]);
 		if (current != compared)
 			exit(EXIT_FAILURE); //free others
-		i++;
 	}
+	ft_printf("%d\n", i);
 	if (i < 3)
 		exit(EXIT_FAILURE); //free others
 }
