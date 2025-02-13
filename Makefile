@@ -6,10 +6,11 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/12 21:54:14 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/13 01:26:04 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+GREEN	=	\033[1;32m
 CYAN	=	\033[0;36m
 WHITE	=	\033[0m
 CLEAR	=	\r\033[K
@@ -35,6 +36,9 @@ $(NAME): objs $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 	@echo "$(GREEN)so_long ready$(WHITE)"
 
+$(LIBFT):
+	@make -C library/libft
+
 objs:
 	@mkdir -p objs/src/
 
@@ -42,13 +46,13 @@ objs/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	@make clean -C library/libft
 	@rm -rf objs
-	@rm -rf bns_objs
 	@echo "Objetcs files deleted."
 
 fclean: clean
+	@make fclean -C library/libft
 	@rm -f $(NAME)
-	@rm -f $(BNS_NAME)
 	@echo "Full clean completed"
 
 re: fclean all

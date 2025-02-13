@@ -6,13 +6,13 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/12 21:56:16 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/13 06:40:33 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_map_format(char *file)
+static void	check_map_format(char *file, t_map *map)
 {
 	size_t	len;
 
@@ -20,53 +20,91 @@ static void	check_map_format(char *file)
 	if (!file || !*file)
 		exit(EXIT_FAILURE);
 	len = ft_strlen(file);
-	if (ft_strncmp(file + (len - 4), ".ber", 4) != 0) //manage hide file
-		exit(EXIT_FAILURE);
+	if (ft_strncmp(file + (len - 4), ".ber", 4) != 0
+		|| file[len - 5] == '/' || len < 5)
+		ft_perror(USAGE);
+	map->path = NULL;
+	map->path = ft_strdup(PATH);
+	if (!map->path)
+		ft_perror(FAIL_ALLOC);
+	map->path = ft_strjoin(map->path, file);
+	if (!map->path)
+		ft_perror(FAIL_ALLOC);
 }
 
 static void	check_map_rectangular(t_map *map)
 {
-	int	i;
+	int		i;
 	size_t	current;
 	size_t	compared;
 
 	i = 0;
 	current = ft_strlen(map->matrix[i]);
-	while (map->matrix[i++])
+	while (map->matrix[++i])
 	{
 		compared = ft_strlen(map->matrix[i]);
 		if (current != compared)
-			exit(EXIT_FAILURE); //free others
+			ft_perror("Map is not rectangular"); //free others
 	}
-	ft_printf("%d\n", i);
 	if (i < 3)
-		exit(EXIT_FAILURE); //free others
+		ft_perror("Map is not playable"); //free others
 }
 
 static void	check_map_walls(t_map *map)
 {
-	int	x;
-	int	y;
-	int	ymax;
-	int	xmax;
+	unsigned int	x;
+	unsigned int	y;
 
 	x = 0;
 	y = 0;
-	xmax = 0;
-	ymax = 0;
-	xmax = ft_strlen(map->matrix[y]) - 1;
-	while (map->matrix[ymax + 1])
-		ymax++;
-	while (map->matrix[y][x] && map->matrix[ymax][x])
+	map->col = ft_strlen(map->matrix[y]);
+	while (map->matrix[map->row])
+		map->row++;
+	while (x < map->col)
 	{
-		if (map->matrix[y][x] != '1' || map->matrix[ymax][x] != '1')
-			exit(EXIT_FAILURE); //free others
+		if (map->matrix[y][x] != '1' || map->matrix[map->row - 1][x] != '1')
+			ft_perror("Map is not surrounded by walls"); //free others
 		x++;
 	}
-	while (map->matrix[y][x] && map->matrix[y][xmax])
+	x = 0;
+	while (y < map->row)
 	{
-		if (map->matrix[y][x] != '1' || map->matrix[y][xmax] != '1')
-			exit(EXIT_FAILURE); //free others
+		if (map->matrix[y][x] != '1' || map->matrix[y][map->col - 1] != '1')
+			ft_perror("Map is not surrounded by walls"); //free others
+		y++;
+	}
+}
+
+static void	check_map_composition(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map->matrix[y])
+	{
+		x = 0;
+		while (map->matrix[y][x])
+		{
+			if (map->matrix[y][x] == 'C')
+				map->collec++;
+			else if (map->matrix[y][x] == 'E')
+			{
+				map->count_end++;
+				map->end->x = x;
+				map->end->y = y;
+			}
+			else if (map->matrix[y][x] == 'P')
+			{
+				map->count_start++;
+				map->start->x = x;
+				map->start->y = y;
+			}
+			else if ((map->matrix[y][x] != '1' && map->matrix[y][x] != '0')
+				|| (map->count_start > 1 || map->count_end > 1))
+				ft_perror("The composition of the map is incorrect");
+			x++;
+		}
 		y++;
 	}
 }
@@ -80,13 +118,11 @@ void	check_map(char *file)
 	map = NULL;
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
-		exit(EXIT_FAILURE);
-	check_map_format(file);
-	allocate_map(file, map);
+		ft_perror(FAIL_ALLOC);
+	check_map_format(file, map);
+	allocate_map(map);
 	check_map_rectangular(map);
 	check_map_walls(map);
-	/*
-	check_map_gameplay (floodfill)
-	check_map_composition (0 | 1 | C | E | P)
-	*/
+	check_map_composition(map);
+	//check_map_gameplay (floodfill);
 }
