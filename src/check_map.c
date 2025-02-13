@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/13 06:40:33 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:22:51 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,19 @@ static void	check_map_composition(t_map *map)
 		while (map->matrix[y][x])
 		{
 			if (map->matrix[y][x] == 'C')
-				map->collec++;
+			{
+				ft_printf("C ");
+				count_object(&map->count_collec, &map->collec, x, y);
+			}
 			else if (map->matrix[y][x] == 'E')
 			{
-				map->count_end++;
-				map->end->x = x;
-				map->end->y = y;
+				ft_printf("E ");
+				count_object(&map->count_end, &map->end, x, y);
 			}
 			else if (map->matrix[y][x] == 'P')
 			{
-				map->count_start++;
-				map->start->x = x;
-				map->start->y = y;
+				ft_printf("P ");
+				count_object(&map->count_start, &map->start, x, y);
 			}
 			else if ((map->matrix[y][x] != '1' && map->matrix[y][x] != '0')
 				|| (map->count_start > 1 || map->count_end > 1))
@@ -124,5 +125,13 @@ void	check_map(char *file)
 	check_map_rectangular(map);
 	check_map_walls(map);
 	check_map_composition(map);
-	//check_map_gameplay (floodfill);
+	ft_printf("Collectables: %u\n", map->count_collec);
+	ft_printf("Exits: %u\n", map->count_end);
+	ft_printf("Players: %u\n", map->count_start);
+	while (map->collec)
+	{
+		ft_printf("Pos[%i][%i]]", map->collec->y, map->collec->x);
+		map->collec = map->collec->next;
+	}
+	//check_map_playable(map);
 }
