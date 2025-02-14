@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/13 17:15:29 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/14 03:23:48 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	allocate_matrix(t_map *map, int *fd)
 	map->matrix = ft_split(line, '\n');
 	if (!map->matrix)
 		exit(EXIT_FAILURE);
-	free_arrays(3, map->path, add, line);
+	//free_arrays(3, map->path, add, line);
 	close(*fd);
 }
 
@@ -45,19 +45,12 @@ static void	allocate_pos(t_map *map)
 {
 	map->start = NULL;
 	map->end = NULL;
-	map->collec = NULL;
 	map->start = ft_calloc(1, sizeof(t_pos));
 	if (!map->start)
 		ft_perror(FAIL_ALLOC);
-	map->start->next = NULL;
 	map->end = ft_calloc(1, sizeof(t_pos));
 	if (!map->end)
 		ft_perror(FAIL_ALLOC);
-	map->end->next = NULL;
-	map->collec = ft_calloc(1, sizeof(t_pos));
-	if (!map->collec)
-		ft_perror(FAIL_ALLOC);
-	map->collec->next = NULL;
 }
 
 void	allocate_map(t_map *map)
@@ -68,30 +61,22 @@ void	allocate_map(t_map *map)
 	allocate_pos(map);
 }
 
-void	count_object(unsigned int *count, t_pos **object, int x, int y)
+void	set_object(t_map *map, int x, int y, char type)
 {
-	t_pos 			*current;
-	unsigned int	i;
-	static int		here;
-
-	here += 1;
-	ft_printf("%d\n", here);
-	if (!count || !object || !*object)
+	if (!map)
 		ft_perror(FAIL_ALLOC);
-	i = 0;
-	current = ft_calloc(1, sizeof(t_pos));
-	if (!current)
-		ft_perror(FAIL_ALLOC);
-	while (i < *count)
+	if (type == 'P' && map->count_start == 0)
 	{
-		*object = (* object)->next;
-		i++;
+		map->start->x = x;
+		map->start->y = y;
+		map->count_start = 1;
 	}
-	*count += 1;
-	*object = current;
-	(* object)->x = x;
-	(* object)->y = y;
-	(* object)->next = NULL;
+	else if (type == 'E' && map->count_end == 0)
+	{
+		map->end->x = x;
+		map->end->y = y;
+		map->count_end = 1;
+	}
 }
 
 // void	check_map_playable(t_map *map)

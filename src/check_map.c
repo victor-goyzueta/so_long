@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/13 17:22:51 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/14 03:33:50 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,32 @@ static void	check_map_walls(t_map *map)
 
 static void	check_map_composition(t_map *map)
 {
-	int	x;
-	int	y;
+	int				x;
+	int				y;
 
+	map->count_collec = 0;
+	map->count_start = 0;
+	map->count_end = 0;
 	y = 0;
-	while (map->matrix[y])
+	while (map->matrix++)
 	{
 		x = 0;
 		while (map->matrix[y][x])
 		{
+			ft_printf("map->matrix[%d][%d] = %c | Dirección: %p\n", y, x, map->matrix[y][x], map->matrix);
+			ft_printf("Encontrado '%c' en (%u, %u)\n", map->matrix[y][x], y, x);
 			if (map->matrix[y][x] == 'C')
-			{
-				ft_printf("C ");
-				count_object(&map->count_collec, &map->collec, x, y);
-			}
-			else if (map->matrix[y][x] == 'E')
-			{
-				ft_printf("E ");
-				count_object(&map->count_end, &map->end, x, y);
-			}
-			else if (map->matrix[y][x] == 'P')
-			{
-				ft_printf("P ");
-				count_object(&map->count_start, &map->start, x, y);
-			}
-			else if ((map->matrix[y][x] != '1' && map->matrix[y][x] != '0')
-				|| (map->count_start > 1 || map->count_end > 1))
-				ft_perror("The composition of the map is incorrect");
+				map->count_collec += 1;
+			else if (map->matrix[y][x] == 'P' || map->matrix[y][x] == 'E')
+				set_object(map, x, y, map->matrix[y][x]);
+			else if (map->matrix[y][x] != '1' && map->matrix[y][x] != '0')
+				ft_perror(FAIL_COMP);
 			x++;
 		}
 		y++;
 	}
+	if (map->count_collec < 1)
+		ft_perror(FAIL_COMP);
 }
 
 void	check_map(char *file)
@@ -122,16 +117,9 @@ void	check_map(char *file)
 		ft_perror(FAIL_ALLOC);
 	check_map_format(file, map);
 	allocate_map(map);
+	print_map(map);
 	check_map_rectangular(map);
 	check_map_walls(map);
 	check_map_composition(map);
-	ft_printf("Collectables: %u\n", map->count_collec);
-	ft_printf("Exits: %u\n", map->count_end);
-	ft_printf("Players: %u\n", map->count_start);
-	while (map->collec)
-	{
-		ft_printf("Pos[%i][%i]]", map->collec->y, map->collec->x);
-		map->collec = map->collec->next;
-	}
 	//check_map_playable(map);
 }
