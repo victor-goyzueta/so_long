@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/14 03:33:50 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/14 03:38:50 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	check_map_composition(t_map *map)
 	map->count_start = 0;
 	map->count_end = 0;
 	y = 0;
-	while (map->matrix++)
+	while (map->matrix[y])
 	{
 		x = 0;
 		while (map->matrix[y][x])

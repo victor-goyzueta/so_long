@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/14 03:23:48 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/14 03:39:58 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	allocate_matrix(t_map *map, int *fd)
 	map->matrix = ft_split(line, '\n');
 	if (!map->matrix)
 		exit(EXIT_FAILURE);
-	//free_arrays(3, map->path, add, line);
+	free_arrays(3, map->path, add, line);
 	close(*fd);
 }
 
