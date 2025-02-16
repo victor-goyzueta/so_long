@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/14 03:39:58 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/16 01:32:42 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static void	allocate_matrix(t_map *map, int *fd)
 	*fd = open(map->path, O_RDONLY);
 	if (*fd < 0)
 		ft_perror("Failed to open fd");
-	line = get_next_line(*fd);
+	line = ft_strdup("");
 	if (!line)
-		exit(EXIT_FAILURE);
+		ft_perror(FAIL_ALLOC);
 	add = get_next_line(*fd);
 	if (!add)
-		exit(EXIT_FAILURE);
+		ft_perror(FAIL_ALLOC);
 	while (add)
 	{
 		line = ft_strjoin(line, add);
 		if (!line)
-			exit(EXIT_FAILURE);
+			ft_perror(FAIL_ALLOC);
 		free(add);
 		add = get_next_line(*fd);
 	}
 	map->matrix = ft_split(line, '\n');
 	if (!map->matrix)
-		exit(EXIT_FAILURE);
-	free_arrays(3, map->path, add, line);
+		ft_perror(FAIL_ALLOC);
+	free_arrays(3, map->path, add);
 	close(*fd);
 }
 

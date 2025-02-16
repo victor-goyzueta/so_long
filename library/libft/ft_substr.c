@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 20:47:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/01/16 18:14:09 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/16 01:21:01 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = 0;
 	else if ((start + len) > slen)
 		len = slen - start;
-	ss = malloc(sizeof(char *) + (len + 1));
+	ss = ft_calloc((len + 1), sizeof(char));
 	if (!ss)
 		return (NULL);
 	i = 0;
