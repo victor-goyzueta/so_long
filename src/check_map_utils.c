@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:32:42 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:57:58 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void	allocate_matrix(t_map *map, int *fd)
 		free(add);
 		add = get_next_line(*fd);
 	}
-	map->matrix = ft_split(line, '\n');
-	if (!map->matrix)
+	(*map).matrix = ft_split(line, '\n');
+	if (!(*map).matrix)
 		ft_perror(FAIL_ALLOC);
-	free_arrays(3, map->path, add);
+	free_arrays(3, map->path, line, add);
 	close(*fd);
 }
 
-static void	allocate_pos(t_map *map)
+static void	allocate_object(t_map *map)
 {
 	map->start = NULL;
 	map->end = NULL;
@@ -51,6 +51,9 @@ static void	allocate_pos(t_map *map)
 	map->end = ft_calloc(1, sizeof(t_pos));
 	if (!map->end)
 		ft_perror(FAIL_ALLOC);
+	(*map).count_collec = 0;
+	(*map).start->x= 0;
+	(*map).start->y = 0;
 }
 
 void	allocate_map(t_map *map)
@@ -58,25 +61,19 @@ void	allocate_map(t_map *map)
 	int	fd;
 
 	allocate_matrix(map, &fd);
-	allocate_pos(map);
+	allocate_object(map);
 }
 
-void	set_object(t_map *map, int x, int y, char type)
+void	set_object(t_pos *object, int x, int y)
 {
-	if (!map)
+	if (!object)
 		ft_perror(FAIL_ALLOC);
-	if (type == 'P' && map->count_start == 0)
-	{
-		map->start->x = x;
-		map->start->y = y;
-		map->count_start = 1;
-	}
-	else if (type == 'E' && map->count_end == 0)
-	{
-		map->end->x = x;
-		map->end->y = y;
-		map->count_end = 1;
-	}
+	if ((*object).count != 0)
+		ft_perror(FAIL_COMP);
+	(*object).count = 1;
+	object->count = 1;
+	(*object).x = x;
+	(*object).y = y;
 }
 
 // void	check_map_playable(t_map *map)

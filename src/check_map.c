@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/16 01:34:38 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:28:54 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,33 +79,42 @@ static void	check_map_composition(t_map *map)
 {
 	int	x;
 	int	y;
-	
-	map->count_collec = 0;
-	map->count_start = 0;
-	map->count_end = 0;
+
 	y = 0;
 	while (map->matrix[y])
 	{
 		x = 0;
-		ft_printf("Matrix[y]: %p\n", map->matrix[y]);
-		while (map->matrix[y][x])
+		while (map->matrix[y][x] && map->matrix[y][x] != '\n')
 		{
-			ft_printf("Matrix[y][x]: %p\n", map->matrix[y][x]);
+			ft_printf("Pointer %p\n", &map->matrix[y][x]);
 			if (map->matrix[y][x] == 'C')
+			{
+				ft_printf("C: matrix[%i][%i]\n", y, x);
+				ft_printf("Char found %c\n", map->matrix[y][x]);
 				map->count_collec += 1;
-			else if (map->matrix[y][x] == 'P' || map->matrix[y][x] == 'E')
-				set_object(map, x, y, map->matrix[y][x]);
+			}
+			else if (map->matrix[y][x] == 'P')
+			{
+				ft_printf("P: matrix[%i][%i]\n", y, x);
+				ft_printf("Char found %c\n", map->matrix[y][x]);
+				set_object(map->start, x, y);
+			}
+			else if (map->matrix[y][x] == 'E')
+			{
+				ft_printf("E: matrix[%i][%i]\n", y, x);
+				printf("%i%i%i%i",9,2,3,4);
+				ft_printf("Char found %c\n", map->matrix[y][x]);
+				set_object(map->end, x, y);
+			}
 			else if (map->matrix[y][x] != '1' && map->matrix[y][x] != '0')
-				ft_perror("The composition of the map is incorrect2");
+				ft_perror(FAIL_COMP);
 			x++;
 		}
 		y++;
 	}
-	ft_printf("Collectables: %u\n", map->count_collec);
-	ft_printf("Player: %u\n", map->count_start);
-	ft_printf("Exit: %u\n", map->count_end);
-	if (map->count_collec < 1)
+	if (map->count_collec < 1 || map->start->count != 1 || map->end->count != 1)
 		ft_perror(FAIL_COMP);
+	print_objects(map);
 }
 
 void	check_map(char *file)
