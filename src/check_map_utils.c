@@ -6,13 +6,13 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/17 17:57:58 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:22:59 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	allocate_matrix(t_map *map, int *fd)
+void	allocate_matrix(t_map *map, int *fd)
 {
 	char	*line;
 	char	*add;
@@ -41,7 +41,7 @@ static void	allocate_matrix(t_map *map, int *fd)
 	close(*fd);
 }
 
-static void	allocate_object(t_map *map)
+void	allocate_object(t_map *map)
 {
 	map->start = NULL;
 	map->end = NULL;
@@ -51,17 +51,9 @@ static void	allocate_object(t_map *map)
 	map->end = ft_calloc(1, sizeof(t_pos));
 	if (!map->end)
 		ft_perror(FAIL_ALLOC);
-	(*map).count_collec = 0;
-	(*map).start->x= 0;
-	(*map).start->y = 0;
-}
-
-void	allocate_map(t_map *map)
-{
-	int	fd;
-
-	allocate_matrix(map, &fd);
-	allocate_object(map);
+	map->count_collec = 0;
+	map->start->count = 0;
+	map->end->count = 0;
 }
 
 void	set_object(t_pos *object, int x, int y)
@@ -70,13 +62,53 @@ void	set_object(t_pos *object, int x, int y)
 		ft_perror(FAIL_ALLOC);
 	if ((*object).count != 0)
 		ft_perror(FAIL_COMP);
-	(*object).count = 1;
 	object->count = 1;
-	(*object).x = x;
-	(*object).y = y;
+	object->x = x;
+	object->y = y;
 }
 
-// void	check_map_playable(t_map *map)
-// {
-// 	//
-// }
+static void	flood_fill(t_map *map, unsigned int x, unsigned int y)
+{
+	if (x < 0 || y < 0 || x >= map->col || y >= map->row ||
+		map->matrix[y][x] == '1' || map->matrix[y][x] == 'F')
+		return ;
+	if (map->matrix[y][x] == 'C')
+		map->count_collec--;
+	if (map->matrix[y][x] == 'E')
+		map->end->count--;
+	if (map->matrix[y][x] != 'P')
+		map->matrix[y][x] = 'F';
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x, y + 1);
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x, y - 1);
+}
+
+void	check_map_playable(t_map *map)
+{
+	int				i;
+	char			**cpy;
+	unsigned char	count;
+
+	cpy = NULL;
+	cpy = ft_calloc(map->row, sizeof(char *));
+	if (!cpy || !map)
+		ft_perror(FAIL_ALLOC);
+	count = 0;
+	count = map->count_collec;
+	i = -1;
+	while (map->matrix[++i])
+	{
+		cpy[i] = ft_strdup(map->matrix[i]);
+		if (!cpy[i])
+			ft_perror(FAIL_ALLOC);
+	}
+	cpy[i] = NULL;
+	flood_fill(map, map->start->x, map->start->y);
+	if (map->count_collec != 0 || map->end->count != 0)
+		ft_perror("Map is not playable");
+	map->count_collec = count;
+	map->end->count = 1;
+	map->matrix = cpy;
+	free(cpy);
+}

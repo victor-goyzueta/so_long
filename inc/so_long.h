@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/17 16:59:38 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:26:56 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ typedef struct s_map
 
 void	validate_arguments(int argc, char **argv);
 void	check_map(char *file);
-/*check_map_utils*/
+/*allocate_mem*/
 void	allocate_map(t_map *map);
+void	allocate_matrix(t_map *map, int *fd);
+void	allocate_object(t_map *map);
+/*check_map_utils*/
 void	set_object(t_pos *object, int x, int y);
+void	check_map_playable(t_map *map);
 /*other*/
 void	print_map(t_map *map);
 void	print_objects(t_map *map);
