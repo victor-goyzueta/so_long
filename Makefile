@@ -6,9 +6,11 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/17 19:24:24 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/17 21:45:47 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+MAKEFLAGS += --no-print-directory
 
 GREEN	=	\033[1;32m
 CYAN	=	\033[0;36m
