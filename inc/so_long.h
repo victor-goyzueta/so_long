@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 17:28:10 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:20:32 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "libft.h"
-# include <mlx.h>
+# include "mlx.h"
 # include <math.h>
 
 # define USAGE "Usage: ./so_long [name_map.ber]"
@@ -60,7 +60,7 @@ typedef struct s_game
 	t_map		*map;
 }	t_game;
 
-void	check_map(int argc, char *file);
+void	check_map(int argc, char *file, t_game *game);
 void	init_mlx(t_game *game);
 /*check_map*/
 void	check_map_format(char *file, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 17:23:03 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:19:46 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_mlx(t_game *game)
 {
-	game->mlx = NULL;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		ft_perror(FAIL_ALLOC);
