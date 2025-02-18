@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 02:19:16 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:28:10 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define SO_LONG_H
 
 # include "libft.h"
-//# include <mlx.h>
+# include <mlx.h>
 # include <math.h>
 
 # define USAGE "Usage: ./so_long [name_map.ber]"
@@ -47,14 +47,22 @@ typedef struct s_map
 	t_pos			*end;
 }	t_map;
 
-// typedef struct s_game
-// {
-// 	t_player	*player;
-// 	t_map		*map;
-// }	t_game;
+typedef struct s_window
+{
+	void	*new_window;
+}	t_window;
 
-/*check_map*/
+
+typedef struct s_game
+{
+	void		*mlx;
+	t_window	*window;
+	t_map		*map;
+}	t_game;
+
 void	check_map(int argc, char *file);
+void	init_mlx(t_game *game);
+/*check_map*/
 void	check_map_format(char *file, t_map *map);
 void	check_map_rectangular(t_map *map);
 void	check_map_walls(t_map *map);
@@ -64,6 +72,7 @@ void	check_map_playable(t_map *map);
 void	set_object(t_pos *object, int x, int y);
 void	flood_fill(t_map *map, char **cpy, unsigned int x, unsigned int y);
 /*allocate_mem*/
+void	allocate_mem(t_game *game);
 void	allocate_map(t_map *map);
 void	allocate_matrix(t_map *map, int *fd);
 void	allocate_object(t_map *map);
