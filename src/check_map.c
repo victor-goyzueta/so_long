@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 02:18:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:19:48 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_map_format(char *file, t_map *map)
 		|| file[len - 5] == '/' || len < 5)
 		ft_perror(USAGE);
 	map->path = NULL;
-	map->path = ft_strdup(PATH);
+	map->path = ft_strdup(PATH_MAP);
 	if (!map->path)
 		ft_perror(FAIL_ALLOC);
 	map->path = ft_strjoin(map->path, file);
@@ -38,6 +38,8 @@ void	check_map_rectangular(t_map *map)
 	size_t	current;
 	size_t	compared;
 
+	if (!map)
+		ft_perror(FAIL_ALLOC);
 	i = 0;
 	current = ft_strlen(map->matrix[i]);
 	while (map->matrix[++i])
@@ -57,6 +59,8 @@ void	check_map_walls(t_map *map)
 
 	x = 0;
 	y = 0;
+	if (!map)
+		ft_perror(FAIL_ALLOC);
 	map->col = ft_strlen(map->matrix[y]);
 	while (map->matrix[map->row])
 		map->row++;

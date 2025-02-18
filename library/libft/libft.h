@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 19:48:23 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/13 01:58:03 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:35:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,8 @@ void	free_array(char **arr);
 void	free_arrays(int count, ...);
 void	free_list(t_list **stack);
 void	ft_exit_free(int EXIT, t_list **stack, char **arr);
+
+/*so_long*/
+char	*so_strjoin(char const *s1, char const *s2);
 
 #endif

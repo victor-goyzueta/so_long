@@ -6,12 +6,11 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/18 19:32:54 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/18 21:45:14 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAKEFLAGS += --no-print-directory
-MAKEFLAGS += --silent
 
 GREEN	=	\033[1;32m
 CYAN	=	\033[0;36m
@@ -35,6 +34,7 @@ SRCS = src/main.c\
 	src/check_map_utils.c\
 	src/allocate_mem.c\
 	src/init_mlx.c\
+	src/load_object.c\
 	src/others.c\
 
 OBJ = $(SRCS:%.c=objs/%.o)
@@ -49,7 +49,7 @@ $(LIBFT):
 	@make -C library/libft
 
 $(MINILIBX):
-	@make -C library/minilibx-linux
+	@make -C library/minilibx-linux --silent > /dev/null 2>&1
 
 objs:
 	@mkdir -p objs/src/
