@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 02:08:21 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:18:09 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	set_object(t_pos *object, int x, int y)
 	object->y = y;
 }
 
-void	flood_fill(t_map *map, unsigned int x, unsigned int y)
+void	flood_fill(t_map *map, char **cpy, unsigned int x, unsigned int y)
 {
 	static int	loop;
 
@@ -83,16 +83,16 @@ void	flood_fill(t_map *map, unsigned int x, unsigned int y)
 	if (loop > LOOP_MAX)
 		ft_perror("Map size is too long");
 	if (x < 0 || y < 0 || x >= map->col || y >= map->row
-		|| map->matrix[y][x] == '1' || map->matrix[y][x] == 'F')
+		|| cpy[y][x] == '1' || cpy[y][x] == 'F')
 		return ;
-	if (map->matrix[y][x] == 'C')
+	if (cpy[y][x] == 'C')
 		map->count_collec--;
-	if (map->matrix[y][x] == 'E')
+	if (cpy[y][x] == 'E')
 		map->end->count--;
-	if (map->matrix[y][x] != 'P')
-		map->matrix[y][x] = 'F';
-	flood_fill(map, x + 1, y);
-	flood_fill(map, x, y + 1);
-	flood_fill(map, x - 1, y);
-	flood_fill(map, x, y - 1);
+	if (cpy[y][x] != 'P')
+		cpy[y][x] = 'F';
+	flood_fill(map, cpy, x + 1, y);
+	flood_fill(map, cpy, x, y + 1);
+	flood_fill(map, cpy, x - 1, y);
+	flood_fill(map, cpy, x, y - 1);
 }

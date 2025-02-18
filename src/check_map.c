@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 01:57:20 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:18:57 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,10 @@ void	check_map_playable(t_map *map)
 			ft_perror(FAIL_ALLOC);
 	}
 	cpy[i] = NULL;
-	flood_fill(map, map->start->x, map->start->y);
+	flood_fill(map, cpy, map->start->x, map->start->y);
 	if (map->count_collec != 0 || map->end->count != 0)
 		ft_perror("Map is not playable");
 	map->count_collec = count;
 	map->end->count = 1;
-	map->matrix = cpy;
 	free(cpy);
 }

@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 01:55:47 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:21:05 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ void	check_map(int argc, char *file)
 	check_map_walls(map);
 	check_map_composition(map);
 	check_map_playable(map);
+	print_map(map); //delete
+	print_objects(map); //delete
 }
 
 int	main(int argc, char **argv)
 {
 	check_map(argc, argv[1]);
+	/*init_mxl*/
 }
