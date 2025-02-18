@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/17 21:45:47 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/18 02:08:40 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ LIBFT = library/libft/libft.a
 SRCS = src/main.c\
 	src/check_map.c\
 	src/check_map_utils.c\
-	src/allocate_mem.c\
 	src/others.c\
 
 OBJ = $(SRCS:%.c=objs/%.o)

@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/17 21:22:59 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:08:21 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	allocate_matrix(t_map *map, int *fd)
 		free(add);
 		add = get_next_line(*fd);
 	}
-	(*map).matrix = ft_split(line, '\n');
-	if (!(*map).matrix)
+	map->matrix = ft_split(line, '\n');
+	if (!map->matrix)
 		ft_perror(FAIL_ALLOC);
 	free_arrays(3, map->path, line, add);
 	close(*fd);
@@ -56,6 +56,14 @@ void	allocate_object(t_map *map)
 	map->end->count = 0;
 }
 
+void	allocate_map(t_map *map)
+{
+	int	fd;
+
+	allocate_matrix(map, &fd);
+	allocate_object(map);
+}
+
 void	set_object(t_pos *object, int x, int y)
 {
 	if (!object)
@@ -67,10 +75,15 @@ void	set_object(t_pos *object, int x, int y)
 	object->y = y;
 }
 
-static void	flood_fill(t_map *map, unsigned int x, unsigned int y)
+void	flood_fill(t_map *map, unsigned int x, unsigned int y)
 {
-	if (x < 0 || y < 0 || x >= map->col || y >= map->row ||
-		map->matrix[y][x] == '1' || map->matrix[y][x] == 'F')
+	static int	loop;
+
+	loop++;
+	if (loop > LOOP_MAX)
+		ft_perror("Map size is too long");
+	if (x < 0 || y < 0 || x >= map->col || y >= map->row
+		|| map->matrix[y][x] == '1' || map->matrix[y][x] == 'F')
 		return ;
 	if (map->matrix[y][x] == 'C')
 		map->count_collec--;
@@ -82,33 +95,4 @@ static void	flood_fill(t_map *map, unsigned int x, unsigned int y)
 	flood_fill(map, x, y + 1);
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y - 1);
-}
-
-void	check_map_playable(t_map *map)
-{
-	int				i;
-	char			**cpy;
-	unsigned char	count;
-
-	cpy = NULL;
-	cpy = ft_calloc(map->row, sizeof(char *));
-	if (!cpy || !map)
-		ft_perror(FAIL_ALLOC);
-	count = 0;
-	count = map->count_collec;
-	i = -1;
-	while (map->matrix[++i])
-	{
-		cpy[i] = ft_strdup(map->matrix[i]);
-		if (!cpy[i])
-			ft_perror(FAIL_ALLOC);
-	}
-	cpy[i] = NULL;
-	flood_fill(map, map->start->x, map->start->y);
-	if (map->count_collec != 0 || map->end->count != 0)
-		ft_perror("Map is not playable");
-	map->count_collec = count;
-	map->end->count = 1;
-	map->matrix = cpy;
-	free(cpy);
 }

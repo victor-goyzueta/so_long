@@ -6,20 +6,34 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/13 06:40:53 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 01:55:47 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	validate_arguments(int argc, char **argv)
+void	check_map(int argc, char *file)
 {
+	t_map	*map;
+
 	if (argc != 2)
 		ft_perror(USAGE);
-	check_map(argv[1]);
+	if (!file || !*file)
+		ft_perror(USAGE);
+	map = NULL;
+	map = ft_calloc(1, sizeof(t_map));
+	if (!map)
+		ft_perror(FAIL_ALLOC);
+	map->matrix = NULL;
+	check_map_format(file, map);
+	allocate_map(map);
+	check_map_rectangular(map);
+	check_map_walls(map);
+	check_map_composition(map);
+	check_map_playable(map);
 }
 
 int	main(int argc, char **argv)
 {
-	validate_arguments(argc, argv);
+	check_map(argc, argv[1]);
 }

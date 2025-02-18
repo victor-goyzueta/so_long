@@ -6,19 +6,19 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/17 20:49:52 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/18 01:57:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_map_format(char *file, t_map *map)
+void	check_map_format(char *file, t_map *map)
 {
 	size_t	len;
 
 	len = 0;
 	if (!file || !*file)
-		exit(EXIT_FAILURE);
+		ft_perror(USAGE);
 	len = ft_strlen(file);
 	if (ft_strncmp(file + (len - 4), ".ber", 4) != 0
 		|| file[len - 5] == '/' || len < 5)
@@ -32,7 +32,7 @@ static void	check_map_format(char *file, t_map *map)
 		ft_perror(FAIL_ALLOC);
 }
 
-static void	check_map_rectangular(t_map *map)
+void	check_map_rectangular(t_map *map)
 {
 	int		i;
 	size_t	current;
@@ -50,7 +50,7 @@ static void	check_map_rectangular(t_map *map)
 		ft_perror("Map is not playable"); //free others
 }
 
-static void	check_map_walls(t_map *map)
+void	check_map_walls(t_map *map)
 {
 	unsigned int	x;
 	unsigned int	y;
@@ -75,7 +75,7 @@ static void	check_map_walls(t_map *map)
 	}
 }
 
-static void	check_map_composition(t_map *map)
+void	check_map_composition(t_map *map)
 {
 	int	x;
 	int	y;
@@ -100,25 +100,33 @@ static void	check_map_composition(t_map *map)
 	}
 	if (map->count_collec < 1 || map->start->count != 1 || map->end->count != 1)
 		ft_perror(FAIL_COMP);
-	print_objects(map); //delete
 }
 
-void	check_map(char *file)
+void	check_map_playable(t_map *map)
 {
-	t_map	*map;
+	int				i;
+	char			**cpy;
+	unsigned char	count;
 
-	if (!file || !*file)
-		exit(EXIT_FAILURE);
-	map = NULL;
-	map = ft_calloc(1, sizeof(t_map));
-	if (!map)
+	cpy = NULL;
+	cpy = ft_calloc(map->row, sizeof(char *));
+	if (!cpy || !map)
 		ft_perror(FAIL_ALLOC);
-	map->matrix = NULL;
-	check_map_format(file, map);
-	allocate_map(map);
-	print_map(map); //delete
-	check_map_rectangular(map);
-	check_map_walls(map);
-	check_map_composition(map);
-	check_map_playable(map);
+	count = 0;
+	count = map->count_collec;
+	i = -1;
+	while (map->matrix[++i])
+	{
+		cpy[i] = ft_strdup(map->matrix[i]);
+		if (!cpy[i])
+			ft_perror(FAIL_ALLOC);
+	}
+	cpy[i] = NULL;
+	flood_fill(map, map->start->x, map->start->y);
+	if (map->count_collec != 0 || map->end->count != 0)
+		ft_perror("Map is not playable");
+	map->count_collec = count;
+	map->end->count = 1;
+	map->matrix = cpy;
+	free(cpy);
 }
