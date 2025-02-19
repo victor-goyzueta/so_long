@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 17:40:53 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:17:49 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 # define LOOP_MAX 4242
 # define SIZE 64
+
+# define ESQ 17
 
 typedef struct s_pos
 {
@@ -92,6 +94,8 @@ void	allocate_mem(t_game **game);
 void	allocate_map(t_map *map);
 void	allocate_matrix(t_map *map, int *fd);
 void	allocate_object(t_map *map);
+/*free*/
+int	free_exit(int EXIT);
 /*others*/
 void	print_map(t_map *map);
 void	print_objects(t_map *map);
