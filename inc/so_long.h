@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 21:41:51 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:03:02 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define USAGE "Usage: ./so_long [name_map.ber]"
 # define PATH_MAP "assets/maps/"
-# define PATH_TEXT "assets/textures"
+# define PATH_TEXT "assets/textures/"
 # define FAIL_ALLOC "Failed memory allocation"
 # define FAIL_COMP "The composition of the map is incorrect"
 
