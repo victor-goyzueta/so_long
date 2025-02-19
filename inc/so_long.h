@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 21:22:48 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:12:31 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@
 # define CLIC_X 17
 # define ESC 65307
 
-# define W	65362
-# define A	65361
-# define S	65364
-# define D	65363
+# define W	119
+# define A	97
+# define S	115
+# define D	100
+
+# define UP		65362
+# define LEFT	65361
+# define DOWN	65364
+# define RIGHT	65363
 
 typedef struct s_pos
 {
