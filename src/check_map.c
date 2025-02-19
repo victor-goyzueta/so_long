@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 21:19:48 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:53:35 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	check_map_rectangular(t_map *map)
 	{
 		compared = ft_strlen(map->matrix[i]);
 		if (current != compared)
-			ft_perror("Map is not rectangular"); //free others
+			ft_perror("Map is not rectangular");
 	}
 	if (i < 3)
-		ft_perror("Map is not playable"); //free others
+		ft_perror("Map is not playable");
 }
 
 void	check_map_walls(t_map *map)
@@ -67,14 +67,14 @@ void	check_map_walls(t_map *map)
 	while (x < map->col)
 	{
 		if (map->matrix[y][x] != '1' || map->matrix[map->row - 1][x] != '1')
-			ft_perror("Map is not surrounded by walls"); //free others
+			ft_perror("Map is not surrounded by walls");
 		x++;
 	}
 	x = 0;
 	while (y < map->row)
 	{
 		if (map->matrix[y][x] != '1' || map->matrix[y][map->col - 1] != '1')
-			ft_perror("Map is not surrounded by walls"); //free others
+			ft_perror("Map is not surrounded by walls");
 		y++;
 	}
 }

@@ -6,16 +6,14 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 20:49:44 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:03:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_map(int argc, char *file, t_game *game)
+void	check_map(char *file, t_game *game)
 {
-	if (argc != 2)
-		ft_perror(USAGE);
 	if (!file || !*file)
 		ft_perror(USAGE);
 	if (!game)
@@ -29,16 +27,42 @@ void	check_map(int argc, char *file, t_game *game)
 	check_map_playable(game->map);
 }
 
+void	init(t_game *game)
+{
+	if (!game)
+		ft_perror(FAIL_ALLOC);
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		ft_perror(FAIL_ALLOC);
+	game->window->new = NULL;
+	game->window->size = 0;
+	game->window->size = SIZE;
+	load_object(game);
+	game->window->new = mlx_new_window(game->mlx,
+			game->map->col * SIZE, game->map->row * SIZE, "so_long");
+	if (!game->window->new)
+		ft_perror(FAIL_ALLOC);
+	render_map(game);
+}
+
+void	play(t_game *game)
+{
+	if (!game)
+		ft_perror(FAIL_ALLOC);
+	mlx_loop(game->mlx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game		*game;
 
-	game = NULL;
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
-		ft_perror(FAIL_ALLOC);
-	allocate_mem(game);
-	check_map(argc, argv[1], game);
-	init_mlx(game);
-	mlx_loop(game->mlx);
+	if (argc == 2)
+	{
+		allocate_mem(&game);
+		check_map(argv[1], game);
+		init(game);
+		play(game);
+	}
+	else
+		ft_perror(USAGE);
 }
