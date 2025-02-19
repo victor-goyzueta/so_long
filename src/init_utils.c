@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 18:03:23 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:30:56 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ static void	set_texture(t_texture *texture, char **current)
 	if (!texture)
 		ft_perror(FAIL_ALLOC);
 	texture->player = NULL;
-	texture->exit = NULL;
+	texture->close = NULL;
 	texture->item = NULL;
 	texture->wall = NULL;
 	texture->floor = NULL;
+	texture->open = NULL;
+	texture->top = NULL;
 	*current = ft_strdup("");
 	if (!*current)
 		ft_perror(FAIL_ALLOC);
@@ -49,8 +51,8 @@ void	load_object(t_game *game)
 	set_current(PATH_TEXT, "player.xpm", &cur);
 	game->texture->player = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->size), &(game->window->size));
-	set_current(PATH_TEXT, "exit.xpm", &cur);
-	game->texture->exit = mlx_xpm_file_to_image(game->mlx, cur,
+	set_current(PATH_TEXT, "close.xpm", &cur);
+	game->texture->close = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->size), &(game->window->size));
 	set_current(PATH_TEXT, "item.xpm", &cur);
 	game->texture->item = mlx_xpm_file_to_image(game->mlx, cur,
@@ -60,6 +62,12 @@ void	load_object(t_game *game)
 			&(game->window->size), &(game->window->size));
 	set_current(PATH_TEXT, "floor.xpm", &cur);
 	game->texture->floor = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->size), &(game->window->size));
+	set_current(PATH_TEXT, "open.xpm", &cur);
+	game->texture->open = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->size), &(game->window->size));
+	set_current(PATH_TEXT, "top.xpm", &cur);
+	game->texture->top = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->size), &(game->window->size));
 	free(cur);
 }
@@ -73,7 +81,7 @@ static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 			game->texture->player, x * SIZE, y * SIZE);
 	else if (id == 'E')
 		mlx_put_image_to_window(game->mlx, game->window->new,
-			game->texture->exit, x * SIZE, y * SIZE);
+			game->texture->close, x * SIZE, y * SIZE);
 	else if (id == 'C')
 		mlx_put_image_to_window(game->mlx, game->window->new,
 			game->texture->item, x * SIZE, y * SIZE);
@@ -83,6 +91,12 @@ static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 	else if (id == '0')
 		mlx_put_image_to_window(game->mlx, game->window->new,
 			game->texture->floor, x * SIZE, y * SIZE);
+	else if (id == 'T')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->top, x * SIZE, y * SIZE);
+	else if (id == 'F')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->open, x * SIZE, y * SIZE);
 }
 
 void	render_map(t_game *game)

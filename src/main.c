@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 18:18:35 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:31:31 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ void	init(t_game *game)
 	if (!game->window->new)
 		ft_perror(FAIL_ALLOC);
 	render_map(game);
+	allocate_player(game);
 }
 
 void	play(t_game *game)
 {
 	if (!game)
 		ft_perror(FAIL_ALLOC);
-	mlx_hook(game->window->new, ESQ, 0, free_exit, game);
+	mlx_key_hook(game->window->new, handle_keypress, game);
+	mlx_hook(game->window->new, CLIC_X, 0, free_exit, game);
 	mlx_loop(game->mlx);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 18:17:49 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:22:48 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@
 # define LOOP_MAX 4242
 # define SIZE 64
 
-# define ESQ 17
+# define CLIC_X 17
+# define ESC 65307
+
+# define W	65362
+# define A	65361
+# define S	65364
+# define D	65363
 
 typedef struct s_pos
 {
@@ -54,7 +60,7 @@ typedef struct s_window
 
 typedef struct s_player
 {
-	void	*player;
+	t_pos	*player;
 }	t_player;
 
 typedef struct s_texture
@@ -63,7 +69,9 @@ typedef struct s_texture
 	void	*floor;
 	void	*item;
 	void	*player;
-	void	*exit;
+	void	*close;
+	void	*open;
+	void	*top;
 }	t_texture;
 
 typedef struct s_game
@@ -76,8 +84,9 @@ typedef struct s_game
 }	t_game;
 
 void	init(t_game *game);
-void	check_map(char *file, t_game *game);
+void	play(t_game *game);
 /*check_map*/
+void	check_map(char *file, t_game *game);
 void	check_map_format(char *file, t_map *map);
 void	check_map_rectangular(t_map *map);
 void	check_map_walls(t_map *map);
@@ -89,13 +98,16 @@ void	flood_fill(t_map *map, char **cpy, unsigned int x, unsigned int y);
 /*init_utils*/
 void	load_object(t_game *game);
 void	render_map(t_game *game);
-/*allocate_mem*/
+/*play_utils*/
+int		handle_keypress(int keycode, t_game *game);
+/*allocate*/
 void	allocate_mem(t_game **game);
 void	allocate_map(t_map *map);
 void	allocate_matrix(t_map *map, int *fd);
 void	allocate_object(t_map *map);
+void	allocate_player(t_game *game);
 /*free*/
-int	free_exit(int EXIT);
+int		free_exit(int EXIT);
 /*others*/
 void	print_map(t_map *map);
 void	print_objects(t_map *map);
