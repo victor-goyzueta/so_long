@@ -47,7 +47,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 	flood_fill(game, cpy, x, y - 1);
 }
 
-void	set_texture(t_game *game, char **current)
+void	set_texture(t_game *game)
 {
 	if (!game || !game->texture)
 		ft_perror(FAIL_ALLOC);
@@ -58,19 +58,16 @@ void	set_texture(t_game *game, char **current)
 	game->texture->floor = NULL;
 	game->texture->open = NULL;
 	game->texture->top = NULL;
-	*current = ft_strdup("");
-	if (!*current)
-		ft_perror(FAIL_ALLOC);
 }
 
-void	set_current(t_game *game, char *path, char *texture, char **current)
+void	set_current(t_game *game, char *path, char *texture, char *current)
 {
-	if (*current)
-		free(*current);
-	*current = NULL;
+	if (current)
+		free(current);
+	current = NULL;
 	if (!game || !path || !*path || !texture || !*texture)
 		ft_perror(FAIL_ALLOC);
-	*current = so_strjoin(path, texture);
-	if (!*current)
+	current = so_strjoin(path, texture);
+	if (!current)
 		ft_perror(FAIL_ALLOC);
 }

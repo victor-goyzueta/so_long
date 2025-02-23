@@ -13,33 +13,44 @@
 #include "so_long.h"
 
 /*same function for all other objects*/
-void	load_object(t_game *game)
+void	load_texture_1(t_game *game)
 {
 	char	*cur;
 
 	cur = NULL;
-	if (!game || !game->texture)
+	cur = ft_strdup("");
+	if (!game || !game->texture || !cur)
 		ft_perror(FAIL_ALLOC);
-	set_texture(game, &cur);
-	set_current(game, PATH_TEXT, "player.xpm", &cur);
+	set_current(game, PATH_TEXT, "player.xpm", cur);
 	game->texture->player = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "close.xpm", &cur);
+	set_current(game, PATH_TEXT, "close.xpm", cur);
 	game->texture->close = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "item.xpm", &cur);
-	game->texture->item = mlx_xpm_file_to_image(game->mlx, cur,
-			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "wall.xpm", &cur);
-	game->texture->wall = mlx_xpm_file_to_image(game->mlx, cur,
-			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "floor.xpm", &cur);
-	game->texture->floor = mlx_xpm_file_to_image(game->mlx, cur,
-			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "open.xpm", &cur);
+	set_current(game, PATH_TEXT, "open.xpm", cur);
 	game->texture->open = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "top.xpm", &cur);
+	set_current(game, PATH_TEXT, "item.xpm", cur);
+	game->texture->item = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->width), &(game->window->height));
+	set_current(game, PATH_TEXT, "wall.xpm", cur);
+	game->texture->wall = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->width), &(game->window->height));
+	set_current(game, PATH_TEXT, "floor.xpm", cur);
+	game->texture->floor = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->width), &(game->window->height));
+	free(cur);
+}
+
+void	load_texture_2(t_game *game)
+{
+	char	*cur;
+
+	cur = NULL;
+	cur = ft_strdup("");
+	if (!game || !game->texture || !cur)
+		ft_perror(FAIL_ALLOC);
+	set_current(game, PATH_TEXT, "top.xpm", cur);
 	game->texture->top = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
 	free(cur);

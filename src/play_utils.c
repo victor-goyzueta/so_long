@@ -14,8 +14,8 @@
 
 static void	set_progress(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;
@@ -36,12 +36,12 @@ static void	set_player_pos(t_game *game, int new_x, int new_y)
 	game->player->y = new_y;
 }
 
-static void move_player(t_game *game, int col, int row)
+static void	move_player(t_game *game, int col, int row)
 {
 	int	x;
 	int	y;
 	int	new_x;
-	int new_y;
+	int	new_y;
 
 	x = game->player->x;
 	y = game->player->y;
@@ -54,10 +54,10 @@ static void move_player(t_game *game, int col, int row)
 	else if (game->map->matrix[new_y][new_x] == 'C')
 		set_progress(game);
 	if (game->map->matrix[y][x] == 'T')
-		game->map->matrix[y][x] =  'E';
+		game->map->matrix[y][x] = 'E';
 	else
 		game->map->matrix[y][x] = '0';
-	if (game->map->matrix[new_y][new_x] ==  'E')
+	if (game->map->matrix[new_y][new_x] == 'E')
 		game->map->matrix[new_y][new_x] = 'T';
 	else
 		game->map->matrix[new_y][new_x] = 'P';

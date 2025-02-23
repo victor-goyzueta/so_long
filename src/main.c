@@ -43,7 +43,9 @@ void	init(t_game *game)
 	game->window->height = 0;
 	game->window->width = WIDTH;
 	game->window->height = HEIGHT;
-	load_object(game);
+	set_texture(game);
+	load_texture_1(game);
+	load_texture_2(game);
 	game->window->new = mlx_new_window(game->mlx,
 			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
 	if (!game->window->new)
