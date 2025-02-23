@@ -12,34 +12,6 @@
 
 #include "so_long.h"
 
-static void	set_texture(t_texture *texture, char **current)
-{
-	if (!texture)
-		ft_perror(FAIL_ALLOC);
-	texture->player = NULL;
-	texture->close = NULL;
-	texture->item = NULL;
-	texture->wall = NULL;
-	texture->floor = NULL;
-	texture->open = NULL;
-	texture->top = NULL;
-	*current = ft_strdup("");
-	if (!*current)
-		ft_perror(FAIL_ALLOC);
-}
-
-static void	set_current(char *path, char *texture, char **current)
-{
-	if (*current)
-		free(*current);
-	*current = NULL;
-	if (!path || !*path || !texture || !*texture)
-		ft_perror(FAIL_ALLOC);
-	*current = so_strjoin(path, texture);
-	if (!*current)
-		ft_perror(FAIL_ALLOC);
-}
-
 /*same function for all other objects*/
 void	load_object(t_game *game)
 {
@@ -48,31 +20,32 @@ void	load_object(t_game *game)
 	cur = NULL;
 	if (!game || !game->texture)
 		ft_perror(FAIL_ALLOC);
-	set_texture(game->texture, &cur);
-	set_current(PATH_TEXT, "player.xpm", &cur);
+	set_texture(game, &cur);
+	set_current(game, PATH_TEXT, "player.xpm", &cur);
 	game->texture->player = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "close.xpm", &cur);
+	set_current(game, PATH_TEXT, "close.xpm", &cur);
 	game->texture->close = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "item.xpm", &cur);
+	set_current(game, PATH_TEXT, "item.xpm", &cur);
 	game->texture->item = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "wall.xpm", &cur);
+	set_current(game, PATH_TEXT, "wall.xpm", &cur);
 	game->texture->wall = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "floor.xpm", &cur);
+	set_current(game, PATH_TEXT, "floor.xpm", &cur);
 	game->texture->floor = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "open.xpm", &cur);
+	set_current(game, PATH_TEXT, "open.xpm", &cur);
 	game->texture->open = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
-	set_current(PATH_TEXT, "top.xpm", &cur);
+	set_current(game, PATH_TEXT, "top.xpm", &cur);
 	game->texture->top = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
 	free(cur);
 }
 
+/*same function for all other textures*/
 static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 {
 	if (!game)

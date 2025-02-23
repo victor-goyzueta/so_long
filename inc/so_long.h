@@ -65,11 +65,6 @@ typedef struct s_window
 	int		height;
 }	t_window;
 
-typedef struct s_player
-{
-	t_pos	*player;
-}	t_player;
-
 typedef struct s_texture
 {
 	void	*wall;
@@ -86,7 +81,7 @@ typedef struct s_game
 	void		*mlx;
 	t_map		*map;
 	t_window	*window;
-	t_player	*player;
+	t_pos		*player;
 	t_texture	*texture;
 }	t_game;
 
@@ -99,24 +94,22 @@ void	check_map_rectangular(t_game *game);
 void	check_map_walls(t_game *game);
 void	check_map_composition(t_game *game);
 void	check_map_playable(t_game *game);
-/*check_map_utils*/
-void	set_object(t_game *game, t_pos *object, int x, int y);
-void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
-/*init_utils*/
+/*init*/
 void	load_object(t_game *game);
 void	render_map(t_game *game);
 /*play_utils*/
 int		handle_keypress(int keycode, t_game *game);
 /*allocate*/
-void	allocate_mem(t_game **game);
-void	allocate_map(t_game *game);
+void	allocate_struct(t_game **game);
 void	allocate_matrix(t_game *game, int *fd);
 void	allocate_object(t_game *game);
 void	allocate_player(t_game *game);
+/*utils*/
+void	set_object(t_game *game, t_pos *object, int x, int y);
+void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
+void	set_texture(t_game *game, char **current);
+void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
 int		free_exit(int EXIT);
-/*others*/
-void	print_map(t_map *map);
-void	print_objects(t_map *map);
 
 #endif

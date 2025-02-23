@@ -31,12 +31,11 @@ MLX_FLAGS = -L library/minilibx-linux -lmlx -lXext -lX11
 
 SRCS = src/main.c\
 	src/check_map.c\
-	src/check_map_utils.c\
 	src/allocate_mem.c\
 	src/init_utils.c\
 	src/play_utils.c\
+	src/utils.c\
 	src/free_exit.c\
-	src/others.c\
 
 OBJ = $(SRCS:%.c=objs/%.o)
 	

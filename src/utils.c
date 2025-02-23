@@ -12,62 +12,10 @@
 
 #include "so_long.h"
 
-void	allocate_matrix(t_game *game, int *fd)
-{
-	char	*line;
-	char	*add;
-
-	*fd = open(game->map->path, O_RDONLY);
-	if (*fd < 0)
-		ft_perror("Failed to open fd");
-	line = ft_strdup("");
-	if (!line)
-		ft_perror(FAIL_ALLOC);
-	add = get_next_line(*fd);
-	if (!add)
-		ft_perror(FAIL_ALLOC);
-	while (add)
-	{
-		line = ft_strjoin(line, add);
-		if (!line)
-			ft_perror(FAIL_ALLOC);
-		free(add);
-		add = get_next_line(*fd);
-	}
-	game->map->matrix = ft_split(line, '\n');
-	if (!game->map->matrix)
-		ft_perror(FAIL_ALLOC);
-	free_arrays(3, game->map->path, line, add);
-	close(*fd);
-}
-
-void	allocate_object(t_game *game)
-{
-	game->map->start = NULL;
-	game->map->end = NULL;
-	game->map->start = ft_calloc(1, sizeof(t_pos));
-	if (!game->map->start)
-		ft_perror(FAIL_ALLOC);
-	game->map->end = ft_calloc(1, sizeof(t_pos));
-	if (!game->map->end)
-		ft_perror(FAIL_ALLOC);
-	game->map->count_collec = 0;
-	game->map->start->count = 0;
-	game->map->end->count = 0;
-}
-
-void	allocate_map(t_game *game)
-{
-	int	fd;
-
-	allocate_matrix(game, &fd);
-	allocate_object(game);
-}
-
 /*add t_game *game to free*/
 void	set_object(t_game *game, t_pos *object, int x, int y)
 {
-	(void)game; //use in case FAIL
+	(void)game;
 	if (!object)
 		ft_perror(FAIL_ALLOC);
 	if (object->count != 0)
@@ -97,4 +45,32 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 	flood_fill(game, cpy, x, y + 1);
 	flood_fill(game, cpy, x - 1, y);
 	flood_fill(game, cpy, x, y - 1);
+}
+
+void	set_texture(t_game *game, char **current)
+{
+	if (!game || !game->texture)
+		ft_perror(FAIL_ALLOC);
+	game->texture->player = NULL;
+	game->texture->close = NULL;
+	game->texture->item = NULL;
+	game->texture->wall = NULL;
+	game->texture->floor = NULL;
+	game->texture->open = NULL;
+	game->texture->top = NULL;
+	*current = ft_strdup("");
+	if (!*current)
+		ft_perror(FAIL_ALLOC);
+}
+
+void	set_current(t_game *game, char *path, char *texture, char **current)
+{
+	if (*current)
+		free(*current);
+	*current = NULL;
+	if (!game || !path || !*path || !texture || !*texture)
+		ft_perror(FAIL_ALLOC);
+	*current = so_strjoin(path, texture);
+	if (!*current)
+		ft_perror(FAIL_ALLOC);
 }

@@ -12,41 +12,29 @@
 
 #include "so_long.h"
 
-static void	set_progress(t_game **game)
+static void	set_progress(t_game *game)
 {
 	int x;
 	int y;
 
 	x = 0;
 	y = 0;
-	x = (*game)->map->end->x;
-	y = (*game)->map->end->y;
-	(*game)->map->count_collec--;
-	ft_printf("%u\n", (*game)->map->count_collec);
-	if ((*game)->map->count_collec == 0)
-		(*game)->map->matrix[y][x] = 'F'; //exit avaliable
+	x = game->map->end->x;
+	y = game->map->end->y;
+	game->map->count_collec--;
+	if (game->map->count_collec == 0)
+		game->map->matrix[y][x] = 'F';
 }
 
-// static void	new_render_map(t_game *game, int x, int y)
-// {
-// 	if (!game)
-// 		ft_perror(FAIL_ALLOC);
-// 	if (game->map->matrix[y][x] == 'P')
-// 		mlx_put_image_to_window(game->mlx, game->window->new,
-// 			game->texture->player, x * SIZE, y * SIZE);
-// 	else if (game->map->matrix[y][x] == '0')
-// 		mlx_put_image_to_window(game->mlx, game->window->new,
-// 			game->texture->floor, x * SIZE, y * SIZE);
-// 	else if (game->map->matrix[y][x] == 'E')
-// 		mlx_put_image_to_window(game->mlx, game->window->new,
-// 			game->texture->close, x * SIZE, y * SIZE);
-// 	else if (game->map->matrix[y][x] == 'T')
-// 		mlx_put_image_to_window(game->mlx, game->window->new,
-// 			game->texture->top, x * SIZE, y * SIZE);
-// 	else if (game->map->matrix[y][x] == 'F')
-// 		mlx_put_image_to_window(game->mlx, game->window->new,
-// 			game->texture->open, x * SIZE, y * SIZE);
-// }
+static void	set_player_pos(t_game *game, int new_x, int new_y)
+{
+	if (!game || !game->player)
+		ft_perror(FAIL_ALLOC);
+	game->player->count++;
+	ft_printf("Movements: %u\n", game->player->count);
+	game->player->x = new_x;
+	game->player->y = new_y;
+}
 
 static void move_player(t_game *game, int col, int row)
 {
@@ -55,8 +43,8 @@ static void move_player(t_game *game, int col, int row)
 	int	new_x;
 	int new_y;
 
-	x = game->player->player->x;
-	y = game->player->player->y;
+	x = game->player->x;
+	y = game->player->y;
 	new_x = abs(x + col);
 	new_y = abs(y + row);
 	if (game->map->matrix[new_y][new_x] == '1')
@@ -64,17 +52,16 @@ static void move_player(t_game *game, int col, int row)
 	else if (game->map->matrix[new_y][new_x] == 'F')
 		free_exit(EXIT_SUCCESS);
 	else if (game->map->matrix[new_y][new_x] == 'C')
-		set_progress(&game);
+		set_progress(game);
 	if (game->map->matrix[y][x] == 'T')
 		game->map->matrix[y][x] =  'E';
 	else
 		game->map->matrix[y][x] = '0';
 	if (game->map->matrix[new_y][new_x] ==  'E')
-		game->map->matrix[new_y][new_x] = 'T'; //player on top of exit
+		game->map->matrix[new_y][new_x] = 'T';
 	else
 		game->map->matrix[new_y][new_x] = 'P';
-	game->player->player->x = new_x;
-	game->player->player->y = new_y;
+	set_player_pos(game, new_x, new_y);
 	render_map(game);
 }
 

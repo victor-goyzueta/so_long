@@ -14,13 +14,17 @@
 
 void	check_map(char *file, t_game *game)
 {
+	int	fd;
+
+	fd = 0;
 	if (!file || !*file)
 		ft_perror(USAGE);
 	if (!game)
 		ft_perror(FAIL_ALLOC);
 	game->map->matrix = NULL;
 	check_map_format(file, game);
-	allocate_map(game);
+	allocate_matrix(game, &fd);
+	allocate_object(game);
 	check_map_rectangular(game);
 	check_map_walls(game);
 	check_map_composition(game);
@@ -63,7 +67,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_perror(USAGE);
-	allocate_mem(&game);
+	allocate_struct(&game);
 	check_map(argv[1], game);
 	init(game);
 	play(game);
