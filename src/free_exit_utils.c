@@ -12,10 +12,40 @@
 
 #include "so_long.h"
 
-int	free_exit(int EXIT)
+static void	free_map(t_game *map)
 {
-	if (EXIT == EXIT_SUCCESS)
-		exit(EXIT_FAILURE);
-	else
-		exit(EXIT_FAILURE);
+	if (!map)
+		return ;
+	//
+}
+
+static void	free_window(t_window *window)
+{
+	if (!window)
+		return ;
+	//
+}
+
+static void	free_texture(t_texture *texture)
+{
+	if (!texture)
+		return ;
+	//
+}
+
+static void	free_player(t_pos *player)
+{
+	if (!player)
+		return ;
+	//
+}
+
+void	free_all(t_game *game)
+{
+	if (!game)
+		return ;
+	free_map(game->map);
+	free_window(game->window);
+	free_texture(game->texture);
+	free_player(game->player);
 }

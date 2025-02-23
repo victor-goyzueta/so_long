@@ -94,7 +94,7 @@ void	check_map_rectangular(t_game *game);
 void	check_map_walls(t_game *game);
 void	check_map_composition(t_game *game);
 void	check_map_playable(t_game *game);
-/*init*/
+/*init_utils*/
 void	load_texture_1(t_game *game);
 void	load_texture_2(t_game *game);
 void	render_map(t_game *game);
@@ -109,8 +109,9 @@ void	allocate_player(t_game *game);
 void	set_object(t_game *game, t_pos *object, int x, int y);
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
 void	set_texture(t_game *game);
-void	set_current(t_game *game, char *path, char *texture, char *current);
+void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
-int		free_exit(int EXIT);
+int	free_exit(int EXIT, t_game *game, char *error);
+void	free_all(t_game *game);
 
 #endif

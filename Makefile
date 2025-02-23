@@ -65,9 +65,10 @@ clean:
 
 fclean: clean
 	@make fclean -C library/libft
+	@make clean -C library/minilibx-linux
 	@rm -f $(NAME)
 	@echo "Full clean completed"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re objs

@@ -74,7 +74,7 @@ void	allocate_struct(t_game **game)
 		ft_perror(FAIL_ALLOC);
 	*game = NULL;
 	*game = ft_calloc(1, sizeof(t_game));
-	if (!game)
+	if (!*game)
 		ft_perror(FAIL_ALLOC);
 	(*game)->mlx = NULL;
 	(*game)->map = NULL;

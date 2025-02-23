@@ -60,14 +60,30 @@ void	set_texture(t_game *game)
 	game->texture->top = NULL;
 }
 
-void	set_current(t_game *game, char *path, char *texture, char *current)
+void	set_current(t_game *game, char *path, char *texture, char **current)
 {
-	if (current)
-		free(current);
-	current = NULL;
+	if (!current || !*current)
+		ft_perror(FAIL_ALLOC);
+	free(*current);
+	*current = NULL;
 	if (!game || !path || !*path || !texture || !*texture)
 		ft_perror(FAIL_ALLOC);
-	current = so_strjoin(path, texture);
-	if (!current)
+	*current = so_strjoin(path, texture);
+	if (!*current)
 		ft_perror(FAIL_ALLOC);
+}
+
+int	free_exit(int EXIT, t_game *game, char *error)
+{
+	free_all(game);
+	if (EXIT == EXIT_SUCCESS)
+	{
+		ft_printf("Victory");
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		ft_perror(error);
+		exit(EXIT_FAILURE);
+	}
 }
