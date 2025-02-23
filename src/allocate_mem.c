@@ -83,14 +83,14 @@ void	allocate_struct(t_game **game)
 	(*game)->texture = NULL;
 	(*game)->map = ft_calloc(1, sizeof(t_map));
 	if (!(*game)->map)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC);
 	(*game)->window = ft_calloc(1, sizeof(t_window));
 	if (!(*game)->window)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC);
 	(*game)->player = ft_calloc(1, sizeof(t_pos));
 	if (!(*game)->player)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC);
 	(*game)->texture = ft_calloc(1, sizeof(t_texture));
 	if (!(*game)->texture)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC);
 }

@@ -111,7 +111,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
 void	set_texture(t_game *game);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
-int	free_exit(int EXIT, t_game *game, char *error);
+int		free_exit(int EXIT, t_game *game, char *error);
 void	free_all(t_game *game);
 
 #endif

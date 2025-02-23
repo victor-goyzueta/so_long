@@ -41,34 +41,3 @@ void	free_array(char **arr)
 		free(arr[i++]);
 	free(arr);
 }
-
-void	free_list(t_list **stack)
-{
-	t_list	*tmp;
-
-	tmp = NULL;
-	if (!stack || !*stack)
-		return ;
-	while (*stack)
-	{
-		tmp = (*stack)->next;
-		free((*stack)->content);
-		free(*stack);
-		*stack = tmp;
-	}
-}
-
-static void	free_all(t_list **stack, char **arr)
-{
-	free_list(stack);
-	free_array(arr);
-}
-
-void	ft_exit_free(int EXIT, t_list **stack, char **arr)
-{
-	free_all(stack, arr);
-	if (EXIT == EXIT_FAILURE)
-		ft_perror(NULL);
-	else
-		exit(EXIT);
-}
