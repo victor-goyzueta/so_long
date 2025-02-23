@@ -68,7 +68,7 @@ void	set_object(t_pos *object, int x, int y)
 {
 	if (!object)
 		ft_perror(FAIL_ALLOC);
-	if ((*object).count != 0)
+	if (object->count != 0)
 		ft_perror(FAIL_COMP);
 	object->count = 1;
 	object->x = x;

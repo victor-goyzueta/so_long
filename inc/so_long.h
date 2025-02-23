@@ -17,14 +17,15 @@
 # include "mlx.h"
 # include <math.h>
 
-# define USAGE "Usage: ./so_long [name_map.ber]"
+# define USAGE "Usage: ./so_long [map_name.ber]"
 # define PATH_MAP "assets/maps/"
 # define PATH_TEXT "assets/textures/"
 # define FAIL_ALLOC "Failed memory allocation"
 # define FAIL_COMP "The composition of the map is incorrect"
 
 # define LOOP_MAX 4242
-# define SIZE 64
+# define WIDTH 64
+# define HEIGHT 64
 
 # define CLIC_X 17
 # define ESC 65307
@@ -60,7 +61,8 @@ typedef struct s_map
 typedef struct s_window
 {
 	void	*new;
-	int		size;
+	int		width;
+	int		height;
 }	t_window;
 
 typedef struct s_player

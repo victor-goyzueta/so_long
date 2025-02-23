@@ -66,7 +66,6 @@ clean:
 
 fclean: clean
 	@make fclean -C library/libft
-	@make fclean -C library/minilibx-linux
 	@rm -f $(NAME)
 	@echo "Full clean completed"
 

@@ -35,11 +35,13 @@ void	init(t_game *game)
 	if (!game->mlx)
 		ft_perror(FAIL_ALLOC);
 	game->window->new = NULL;
-	game->window->size = 0;
-	game->window->size = SIZE;
+	game->window->width = 0;
+	game->window->height = 0;
+	game->window->width = WIDTH;
+	game->window->height = HEIGHT;
 	load_object(game);
 	game->window->new = mlx_new_window(game->mlx,
-			game->map->col * SIZE, game->map->row * SIZE, "so_long");
+			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
 	if (!game->window->new)
 		ft_perror(FAIL_ALLOC);
 	render_map(game);
@@ -59,13 +61,10 @@ int	main(int argc, char **argv)
 {
 	t_game		*game;
 
-	if (argc == 2)
-	{
-		allocate_mem(&game);
-		check_map(argv[1], game);
-		init(game);
-		play(game);
-	}
-	else
+	if (argc != 2)
 		ft_perror(USAGE);
+	allocate_mem(&game);
+	check_map(argv[1], game);
+	init(game);
+	play(game);
 }
