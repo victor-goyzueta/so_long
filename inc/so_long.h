@@ -94,14 +94,14 @@ void	init(t_game *game);
 void	play(t_game *game);
 /*check_map*/
 void	check_map(char *file, t_game *game);
-void	check_map_format(char *file, t_map *map);
-void	check_map_rectangular(t_map *map);
-void	check_map_walls(t_map *map);
-void	check_map_composition(t_map *map);
-void	check_map_playable(t_map *map);
+void	check_map_format(char *file, t_game *game);
+void	check_map_rectangular(t_game *game);
+void	check_map_walls(t_game *game);
+void	check_map_composition(t_game *game);
+void	check_map_playable(t_game *game);
 /*check_map_utils*/
-void	set_object(t_pos *object, int x, int y);
-void	flood_fill(t_map *map, char **cpy, unsigned int x, unsigned int y);
+void	set_object(t_game *game, t_pos *object, int x, int y);
+void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
 /*init_utils*/
 void	load_object(t_game *game);
 void	render_map(t_game *game);
@@ -109,9 +109,9 @@ void	render_map(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 /*allocate*/
 void	allocate_mem(t_game **game);
-void	allocate_map(t_map *map);
-void	allocate_matrix(t_map *map, int *fd);
-void	allocate_object(t_map *map);
+void	allocate_map(t_game *game);
+void	allocate_matrix(t_game *game, int *fd);
+void	allocate_object(t_game *game);
 void	allocate_player(t_game *game);
 /*free*/
 int		free_exit(int EXIT);

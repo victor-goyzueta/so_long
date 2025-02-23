@@ -19,12 +19,12 @@ void	check_map(char *file, t_game *game)
 	if (!game)
 		ft_perror(FAIL_ALLOC);
 	game->map->matrix = NULL;
-	check_map_format(file, game->map);
-	allocate_map(game->map);
-	check_map_rectangular(game->map);
-	check_map_walls(game->map);
-	check_map_composition(game->map);
-	check_map_playable(game->map);
+	check_map_format(file, game);
+	allocate_map(game);
+	check_map_rectangular(game);
+	check_map_walls(game);
+	check_map_composition(game);
+	check_map_playable(game);
 }
 
 void	init(t_game *game)
