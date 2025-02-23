@@ -82,7 +82,7 @@ void	flood_fill(t_map *map, char **cpy, unsigned int x, unsigned int y)
 	loop++;
 	if (loop > LOOP_MAX)
 		ft_perror("Map size is too long");
-	if (x < 0 || y < 0 || x >= map->col || y >= map->row
+	if (x >= map->col || y >= map->row
 		|| cpy[y][x] == '1' || cpy[y][x] == 'F')
 		return ;
 	if (cpy[y][x] == 'C')
