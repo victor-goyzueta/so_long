@@ -76,14 +76,8 @@ void	set_current(t_game *game, char *path, char *texture, char **current)
 int	free_exit(int EXIT, t_game *game, char *error)
 {
 	free_all(game);
-	if (EXIT == EXIT_SUCCESS)
-	{
-		ft_printf("Victory");
-		exit(EXIT_SUCCESS);
-	}
-	else
-	{
+	if (EXIT == EXIT_FAILURE)
 		ft_perror(error);
-		exit(EXIT_FAILURE);
-	}
+	ft_printf("Successfully completed");	
+	exit(EXIT);
 }
