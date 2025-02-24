@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 23:12:36 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:00:31 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,18 @@ void	init(t_game *game)
 	allocate_player(game);
 }
 
+static int	handle_exit(t_game *game)
+{
+	free_exit(EXIT_SUCCESS, game, "clic_x", NULL);
+	return (0);
+}
+
 void	play(t_game *game)
 {
 	if (!game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	mlx_key_hook(game->window->new, handle_keypress, game);
-	mlx_hook(game->window->new, CLIC_X, 0, free_exit, game);
+	mlx_hook(game->window->new, CLIC_X, 0, handle_exit, game);
 	mlx_loop(game->mlx);
 }
 

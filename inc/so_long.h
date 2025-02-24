@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/23 23:38:45 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:01:54 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,25 @@
 # include "mlx.h"
 # include <math.h>
 
-# define USAGE "Usage: ./so_long [map_name.ber]"
-# define PATH_MAP "assets/maps/"
-# define PATH_TEXT "assets/textures/"
-# define FAIL_ALLOC "Failed memory allocation"
-# define FAIL_COMP "The composition of the map is incorrect"
-# define FAIL_RECT "Map is not rectangular"
-# define FAIL_PLAY "Map is not playable"
-# define FAIL_WALLS "Map is not surrounded by walls"
-# define FAIL_FD "Failed to open fd"
+# define USAGE		"Usage: ./so_long [map_name.ber]"
+# define PATH_MAP	"assets/maps/"
+# define PATH_TEXT	"assets/textures/"
+# define FAIL_ALLOC	"Failed memory allocation"
+# define FAIL_COMP	"The composition of the map is incorrect"
+# define FAIL_RECT	"Map is not rectangular"
+# define FAIL_PLAY	"Map is not playable"
+# define FAIL_WALLS	"Map is not surrounded by walls"
+# define FAIL_FD	"Failed to open fd"
+# define FAIL_SIZE	"Map size would exceed the memory of the stack"
 
-# define LOOP_MAX 4242
-# define WIDTH 64
-# define HEIGHT 64
+# define LOOP_MAX	4242
+# define ROW_MAX	32
+# define COL_MAX	60
+# define WIDTH 		64
+# define HEIGHT 	64
 
 # define CLIC_X 17
-# define ESC 65307
+# define ESC 	65307
 
 # define W	119
 # define A	97

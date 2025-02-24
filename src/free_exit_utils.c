@@ -6,25 +6,25 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 02:06:30 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:46:43 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	free_map(t_map *map)
+static void	free_map(t_game *game)
 {
-	if (!map)
+	if (!game->map)
 		return ;
-	if (map->matrix)
-		free_array(map->matrix);
-	if (map->path)
-		free(map->path);
-	if (map->start)
-		free(map->start);
-	if (map->end)
-		free(map->end);
-	free(map);
+	if (game->map->matrix)
+		free_array(game->map->matrix);
+	if (game->map->path)
+		free(game->map->path);
+	if (game->map->start)
+		free(game->map->start);
+	if (game->map->end)
+		free(game->map->end);
+	free(game->map);
 }
 
 static void	free_player(t_pos *player)
@@ -56,13 +56,10 @@ static void	free_texture(t_game *game)
 	free(game->texture);
 }
 
-void	free_all(t_game *game)
+static void	free_window(t_game *game)
 {
-	if (!game)
+	if (!game->window)
 		return ;
-	free_map(game->map);
-	free_player(game->player);
-	free_texture(game);
 	if (game->mlx && game->window->new)
 	{
 		mlx_clear_window(game->mlx, game->window->new);
@@ -70,8 +67,21 @@ void	free_all(t_game *game)
 	}
 	game->window->new = NULL;
 	free(game->window);
+}
+
+void	free_all(t_game *game)
+{
+	if (!game)
+		return ;
+	free_map(game);
+	free_player(game->player);
+	free_texture(game);
+	free_window(game);
 	if (game->mlx)
+	{
 		mlx_destroy_display(game->mlx);
-	game->mlx = NULL;
+		free(game->mlx);
+		game->mlx = NULL;
+	}
 	free(game);
 }

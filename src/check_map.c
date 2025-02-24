@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 17:53:35 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:52:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_map_format(char *file, t_game *game)
 	len = ft_strlen(file);
 	if (ft_strncmp(file + (len - 4), ".ber", 4) != 0
 		|| file[len - 5] == '/' || len < 5)
-		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+		free_exit(EXIT_FAILURE, game, USAGE, NULL);
 	game->map->path = NULL;
 	game->map->path = ft_strdup(PATH_MAP);
 	if (!game->map->path)
@@ -119,17 +119,18 @@ void	check_map_playable(t_game *game)
 	unsigned char	count;
 
 	cpy = NULL;
-	cpy = ft_calloc(game->map->row, sizeof(char *));
-	if (!cpy || !game)
-		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	cpy = ft_calloc(game->map->row + 1, sizeof(char *));
+	if (!cpy)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, cpy);
 	count = 0;
 	count = game->map->count_collec;
-	i = -1;
-	while (game->map->matrix[++i])
+	i = 0;
+	while (game->map->matrix[i])
 	{
 		cpy[i] = ft_strdup(game->map->matrix[i]);
 		if (!cpy[i])
 			free_exit(EXIT_FAILURE, game, FAIL_ALLOC, cpy);
+		i++;
 	}
 	cpy[i] = NULL;
 	flood_fill(game, cpy, game->map->start->x, game->map->start->y);
@@ -137,5 +138,5 @@ void	check_map_playable(t_game *game)
 		free_exit(EXIT_FAILURE, game, FAIL_PLAY, cpy);
 	game->map->count_collec = count;
 	game->map->end->count = 1;
-	free(cpy);
+	free_array(cpy);
 }

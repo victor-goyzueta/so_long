@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:29:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 00:29:35 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:49:18 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	move_player(t_game *game, int col, int row)
 int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == ESC)
-		free_exit(EXIT_FAILURE, game, NULL, NULL);
+		free_exit(EXIT_SUCCESS, game, "press_esc", NULL);
 	else if (keycode == UP || keycode == W)
 		move_player(game, 0, -1);
 	else if (keycode == LEFT || keycode == A)
