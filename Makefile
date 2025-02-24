@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/24 19:50:08 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/24 20:09:01 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I library/libft
 CFLAGS += -I library/minilibx-linux
 CFLAGS += -I inc
-#CFLAGS += -g
 
 LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a

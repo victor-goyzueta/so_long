@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 20:01:54 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:09:21 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define FAIL_SIZE	"Map size would exceed the memory of the stack"
 
 # define LOOP_MAX	4242
-# define ROW_MAX	32
-# define COL_MAX	60
 # define WIDTH 		64
 # define HEIGHT 	64
 
