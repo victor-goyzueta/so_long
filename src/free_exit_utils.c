@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 02:03:20 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 02:06:30 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	free_map(t_map *map)
 	if (map->matrix)
 		free_array(map->matrix);
 	if (map->path)
-		free_array(map->path);
+		free(map->path);
 	if (map->start)
 		free(map->start);
 	if (map->end)
