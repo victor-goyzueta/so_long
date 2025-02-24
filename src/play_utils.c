@@ -29,7 +29,7 @@ static void	set_progress(t_game *game)
 static void	set_player_pos(t_game *game, int new_x, int new_y)
 {
 	if (!game || !game->player)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->player->count++;
 	ft_printf("Movements: %u\n", game->player->count);
 	game->player->x = new_x;
@@ -50,7 +50,7 @@ static void	move_player(t_game *game, int col, int row)
 	if (game->map->matrix[new_y][new_x] == '1')
 		return ;
 	else if (game->map->matrix[new_y][new_x] == 'F')
-		free_exit(EXIT_SUCCESS);
+		free_exit(EXIT_SUCCESS, game, FAIL_ALLOC, NULL);
 	else if (game->map->matrix[new_y][new_x] == 'C')
 		set_progress(game);
 	if (game->map->matrix[y][x] == 'T')
@@ -68,7 +68,7 @@ static void	move_player(t_game *game, int col, int row)
 int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == ESC)
-		free_exit(EXIT_FAILURE);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	else if (keycode == UP || keycode == W)
 		move_player(game, 0, -1);
 	else if (keycode == LEFT || keycode == A)

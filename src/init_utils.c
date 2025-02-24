@@ -17,18 +17,17 @@ void	load_texture_1(t_game *game)
 {
 	char	*cur;
 
+	if (!game)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	cur = NULL;
 	cur = ft_strdup("");
-	if (!game || !cur)
-		ft_perror(FAIL_ALLOC);
+	if (!cur)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	set_current(game, PATH_TEXT, "player.xpm", &cur);
 	game->texture->player = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
 	set_current(game, PATH_TEXT, "close.xpm", &cur);
 	game->texture->close = mlx_xpm_file_to_image(game->mlx, cur,
-			&(game->window->width), &(game->window->height));
-	set_current(game, PATH_TEXT, "open.xpm", &cur);
-	game->texture->open = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
 	set_current(game, PATH_TEXT, "item.xpm", &cur);
 	game->texture->item = mlx_xpm_file_to_image(game->mlx, cur,
@@ -46,10 +45,15 @@ void	load_texture_2(t_game *game)
 {
 	char	*cur;
 
+	if (!game)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	cur = NULL;
 	cur = ft_strdup("");
-	if (!game || !cur)
-		ft_perror(FAIL_ALLOC);
+	if (!cur)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	set_current(game, PATH_TEXT, "open.xpm", &cur);
+	game->texture->open = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->width), &(game->window->height));
 	set_current(game, PATH_TEXT, "top.xpm", &cur);
 	game->texture->top = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
@@ -60,7 +64,7 @@ void	load_texture_2(t_game *game)
 static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 {
 	if (!game)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	if (id == 'P')
 		mlx_put_image_to_window(game->mlx, game->window->new,
 			game->texture->player, x * WIDTH, y * HEIGHT);

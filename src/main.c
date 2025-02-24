@@ -17,10 +17,10 @@ void	check_map(char *file, t_game *game)
 	int	fd;
 
 	fd = 0;
-	if (!file || !*file)
-		ft_perror(USAGE);
 	if (!game)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	if (!file || !*file)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->map->matrix = NULL;
 	check_map_format(file, game);
 	allocate_matrix(game, &fd);
@@ -34,10 +34,10 @@ void	check_map(char *file, t_game *game)
 void	init(t_game *game)
 {
 	if (!game)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->mlx = mlx_init();
 	if (!game->mlx)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->window->new = NULL;
 	game->window->width = 0;
 	game->window->height = 0;
@@ -49,7 +49,7 @@ void	init(t_game *game)
 	game->window->new = mlx_new_window(game->mlx,
 			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
 	if (!game->window->new)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	render_map(game);
 	allocate_player(game);
 }
@@ -57,7 +57,7 @@ void	init(t_game *game)
 void	play(t_game *game)
 {
 	if (!game)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	mlx_key_hook(game->window->new, handle_keypress, game);
 	mlx_hook(game->window->new, CLIC_X, 0, free_exit, game);
 	mlx_loop(game->mlx);

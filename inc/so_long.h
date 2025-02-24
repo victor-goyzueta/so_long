@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 23:12:31 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/23 23:38:45 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define PATH_TEXT "assets/textures/"
 # define FAIL_ALLOC "Failed memory allocation"
 # define FAIL_COMP "The composition of the map is incorrect"
+# define FAIL_RECT "Map is not rectangular"
+# define FAIL_PLAY "Map is not playable"
+# define FAIL_WALLS "Map is not surrounded by walls"
+# define FAIL_FD "Failed to open fd"
 
 # define LOOP_MAX 4242
 # define WIDTH 64
@@ -111,7 +115,8 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
 void	set_texture(t_game *game);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
-int		free_exit(int EXIT, t_game *game, char *error);
+int		free_exit(int EXIT, t_game *game, char *error, char **cur);
 void	free_all(t_game *game);
+void	fd_free_exit(int fd, t_game *game, char *error, char **cur);
 
 #endif

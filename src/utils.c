@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/18 19:52:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/23 23:45:19 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	set_object(t_game *game, t_pos *object, int x, int y)
 {
 	(void)game;
 	if (!object)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	if (object->count != 0)
-		ft_perror(FAIL_COMP);
+		free_exit(EXIT_FAILURE, game, FAIL_COMP, NULL);
 	object->count = 1;
 	object->x = x;
 	object->y = y;
@@ -31,7 +31,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 
 	loop++;
 	if (loop > LOOP_MAX)
-		ft_perror("Map size is too long");
+		return ;
 	if (x >= game->map->col || y >= game->map->row
 		|| cpy[y][x] == '1' || cpy[y][x] == 'F')
 		return ;
@@ -50,7 +50,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 void	set_texture(t_game *game)
 {
 	if (!game || !game->texture)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->texture->player = NULL;
 	game->texture->close = NULL;
 	game->texture->item = NULL;
@@ -63,21 +63,29 @@ void	set_texture(t_game *game)
 void	set_current(t_game *game, char *path, char *texture, char **current)
 {
 	if (!current || !*current)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	free(*current);
 	*current = NULL;
 	if (!game || !path || !*path || !texture || !*texture)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	*current = so_strjoin(path, texture);
 	if (!*current)
-		ft_perror(FAIL_ALLOC);
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 
-int	free_exit(int EXIT, t_game *game, char *error)
+int	free_exit(int EXIT, t_game *game, char *error, char **cur)
 {
 	free_all(game);
+	if (cur)
+		free_array(cur);
+	if (!*cur)
+		free(*cur);
 	if (EXIT == EXIT_FAILURE)
 		ft_perror(error);
-	ft_printf("Successfully completed");	
-	exit(EXIT);
+	else if (EXIT == EXIT_SUCCESS)
+	{
+		ft_printf("Successfully completed");
+		exit(EXIT);
+	}
+	exit(EXIT_FAILURE);
 }
