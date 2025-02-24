@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exit.c                                        :+:      :+:    :+:   */
+/*   free_exit_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 18:17:28 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 02:03:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,14 @@ static void	free_map(t_map *map)
 	if (!map)
 		return ;
 	if (map->matrix)
-		free(map->matrix);
+		free_array(map->matrix);
 	if (map->path)
-		free(map->path);
+		free_array(map->path);
 	if (map->start)
 		free(map->start);
 	if (map->end)
 		free(map->end);
 	free(map);
-}
-
-static void	free_window(t_window *window)
-{
-	if (!window)
-		return ;
-	if (window->new)
-		free(window->new);
-	free(window);
 }
 
 static void	free_player(t_pos *player)
@@ -43,25 +34,26 @@ static void	free_player(t_pos *player)
 	free(player);
 }
 
-static void	free_texture(t_texture *texture)
+static void	free_texture(t_game *game)
 {
-	if (!texture)
+	if (!game->texture)
 		return ;
-	if (texture->wall)
-		free(texture->wall);
-	if (texture->floor)
-		free(texture->floor);
-	if (texture->item)
-		free(texture->item);
-	if (texture->player)
-		free(texture->player);
-	if (texture->close)
-		free(texture->close);
-	if (texture->open)
-		free(texture->open);
-	if (texture->top)
-		free(texture->top);
-	free(texture);
+	if (game->texture->wall)
+		mlx_destroy_image(game->mlx, game->texture->wall);
+	if (game->texture->floor)
+		mlx_destroy_image(game->mlx, game->texture->floor);
+	if (game->texture->item)
+		mlx_destroy_image(game->mlx, game->texture->item);
+	if (game->texture->player)
+		mlx_destroy_image(game->mlx, game->texture->player);
+	if (game->texture->close)
+		mlx_destroy_image(game->mlx, game->texture->close);
+	if (game->texture->open)
+		mlx_destroy_image(game->mlx, game->texture->open);
+	if (game->texture->top)
+		mlx_destroy_image(game->mlx, game->texture->top);
+	set_texture(game);
+	free(game->texture);
 }
 
 void	free_all(t_game *game)
@@ -69,9 +61,17 @@ void	free_all(t_game *game)
 	if (!game)
 		return ;
 	free_map(game->map);
-	free_window(game->window);
 	free_player(game->player);
-	free_texture(game->texture);
-	free(game->mlx);
+	free_texture(game);
+	if (game->mlx && game->window->new)
+	{
+		mlx_clear_window(game->mlx, game->window->new);
+		mlx_destroy_window(game->mlx, game->window->new);
+	}
+	game->window->new = NULL;
+	free(game->window);
+	if (game->mlx)
+		mlx_destroy_display(game->mlx);
+	game->mlx = NULL;
 	free(game);
 }

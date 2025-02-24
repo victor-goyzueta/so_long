@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/23 23:45:19 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:28:24 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	free_exit(int EXIT, t_game *game, char *error, char **cur)
 	free_all(game);
 	if (cur)
 		free_array(cur);
-	if (!*cur)
-		free(*cur);
 	if (EXIT == EXIT_FAILURE)
 		ft_perror(error);
 	else if (EXIT == EXIT_SUCCESS)
