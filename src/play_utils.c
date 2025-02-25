@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:29:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 16:30:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:45:37 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,32 @@ static void	set_progress(t_game *game)
 		game->map->matrix[y][x] = 'F';
 }
 
-static void	set_player_pos(t_game *game, int new_x, int new_y)
+static void	set_render_pos(t_game *game, int x, int y)
 {
-	if (!game || !game->player)
+	if (!game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->player->count++;
 	ft_printf("Movements: %u\n", game->player->count);
-	game->player->x = new_x;
-	game->player->y = new_y;
+	if (game->map->matrix[game->map->end->y][game->map->end->x] == 'F')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->open,
+			game->map->end->x * WIDTH, game->map->end->y * HEIGHT);
+	if (game->map->matrix[y][x] == '0')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->floor, x * WIDTH, y * HEIGHT);
+	else if (game->map->matrix[y][x] == 'E')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->close, x * WIDTH, y * HEIGHT);
+	else if (game->map->matrix[y][x] == 'P')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->player, x * WIDTH, y * HEIGHT);
+	else if (game->map->matrix[y][x] == 'T')
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->top, x * WIDTH, y * HEIGHT);
+	if (game->player->x == x && game->player->y == y)
+		return ;
+	game->player->x = x;
+	game->player->y = y;
 }
 
 static void	move_player(t_game *game, int col, int row)
@@ -45,8 +63,8 @@ static void	move_player(t_game *game, int col, int row)
 
 	x = game->player->x;
 	y = game->player->y;
-	new_x = abs(x + col);
-	new_y = abs(y + row);
+	new_x = ft_abs(x + col);
+	new_y = ft_abs(y + row);
 	if (game->map->matrix[new_y][new_x] == '1')
 		return ;
 	else if (game->map->matrix[new_y][new_x] == 'F')
@@ -61,8 +79,8 @@ static void	move_player(t_game *game, int col, int row)
 		game->map->matrix[new_y][new_x] = 'T';
 	else
 		game->map->matrix[new_y][new_x] = 'P';
-	set_player_pos(game, new_x, new_y);
-	render_map(game);
+	set_render_pos(game, x, y);
+	set_render_pos(game, new_x, new_y);
 }
 
 int	handle_keypress(int keycode, t_game *game)

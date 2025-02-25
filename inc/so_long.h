@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 17:42:42 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:04:59 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	allocate_matrix(t_game *game, int *fd);
 void	allocate_object(t_game *game);
 void	allocate_player(t_game *game);
 /*utils*/
-void	set_object(t_game *game, t_pos *object, int x, int y);
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
+void	set_object(t_game *game, t_pos *object, int x, int y);
 void	set_texture(t_game *game);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
