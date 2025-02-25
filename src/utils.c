@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 15:49:56 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:04:47 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	free_exit(int EXIT, t_game *game, char *error, char **cur)
 	if (EXIT == EXIT_SUCCESS)
 	{
 		if (ft_strncmp(error, "close_w", 7) == 0)
-			ft_printf("Closed window");
+			ft_printf("Closed window\n");
 		else
-			ft_printf("Successfully completed");
+			ft_printf("Successfully completed\n");
 		exit(EXIT);
 	}
 	else
