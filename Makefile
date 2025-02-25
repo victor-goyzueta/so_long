@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/24 20:09:01 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/25 15:56:20 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ SRCS = src/main.c\
 	src/play_utils.c\
 	src/utils.c\
 	src/free_exit_utils.c\
-	src/fd_free_exit.c\
 
 OBJ = $(SRCS:%.c=objs/%.o)
 	

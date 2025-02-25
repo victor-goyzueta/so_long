@@ -6,13 +6,12 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 20:02:15 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:49:56 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*add t_game *game to free*/
 void	set_object(t_game *game, t_pos *object, int x, int y)
 {
 	(void)game;
@@ -73,15 +72,14 @@ void	set_current(t_game *game, char *path, char *texture, char **current)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 
-int	free_exit(int EXIT, t_game *game, char *error, char **cur)
+void	free_exit(int EXIT, t_game *game, char *error, char **cur)
 {
 	free_all(game);
 	if (cur)
 		free_array(cur);
 	if (EXIT == EXIT_SUCCESS)
 	{
-		if (ft_strncmp(error, "clic_x", 6) == 0 ||
-			ft_strncmp(error, "press_esc", 9) == 0)
+		if (ft_strncmp(error, "close_w", 7) == 0)
 			ft_printf("Closed window");
 		else
 			ft_printf("Successfully completed");
@@ -89,5 +87,4 @@ int	free_exit(int EXIT, t_game *game, char *error, char **cur)
 	}
 	else
 		ft_perror(error);
-	return (0);
 }

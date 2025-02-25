@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 17:46:43 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:55:53 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static void	free_map(t_game *game)
 	if (game->map->end)
 		free(game->map->end);
 	free(game->map);
-}
-
-static void	free_player(t_pos *player)
-{
-	if (!player)
-		return ;
-	free(player);
 }
 
 static void	free_texture(t_game *game)
@@ -64,8 +57,9 @@ static void	free_window(t_game *game)
 	{
 		mlx_clear_window(game->mlx, game->window->new);
 		mlx_destroy_window(game->mlx, game->window->new);
+		free(game->window->new);
+		game->window->new = NULL;
 	}
-	game->window->new = NULL;
 	free(game->window);
 }
 
@@ -74,7 +68,8 @@ void	free_all(t_game *game)
 	if (!game)
 		return ;
 	free_map(game);
-	free_player(game->player);
+	if (game->player)
+		free(game->player);
 	free_texture(game);
 	free_window(game);
 	if (game->mlx)
@@ -84,4 +79,10 @@ void	free_all(t_game *game)
 		game->mlx = NULL;
 	}
 	free(game);
+}
+
+void	fd_free_exit(int fd, t_game *game, char *error, char **cur)
+{
+	close(fd);
+	free_exit(EXIT_FAILURE, game, error, cur);
 }

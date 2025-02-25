@@ -6,13 +6,12 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/19 23:12:16 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:58:23 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*same function for all other objects*/
 void	load_texture_1(t_game *game)
 {
 	char	*cur;
@@ -60,7 +59,6 @@ void	load_texture_2(t_game *game)
 	free(cur);
 }
 
-/*same function for all other textures*/
 static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 {
 	if (!game)

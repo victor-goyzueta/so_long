@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 20:00:31 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:30:13 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	init(t_game *game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	render_map(game);
 	allocate_player(game);
-}
-
-static int	handle_exit(t_game *game)
-{
-	free_exit(EXIT_SUCCESS, game, "clic_x", NULL);
-	return (0);
 }
 
 void	play(t_game *game)

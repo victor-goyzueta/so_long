@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 00:07:11 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:51:02 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	allocate_object(t_game *game)
 	game->map->end->count = 0;
 }
 
-/*free map->start*/
 void	allocate_player(t_game *game)
 {
 	if (!game)

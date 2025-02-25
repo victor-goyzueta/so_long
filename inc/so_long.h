@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/24 20:09:21 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:30:37 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 # define CLIC_X 17
 # define ESC 	65307
+# define Q		113
 
 # define W	119
 # define A	97
@@ -105,6 +106,7 @@ void	load_texture_2(t_game *game);
 void	render_map(t_game *game);
 /*play_utils*/
 int		handle_keypress(int keycode, t_game *game);
+int		handle_exit(t_game *game);
 /*allocate*/
 void	allocate_struct(t_game **game);
 void	allocate_matrix(t_game *game, int *fd);
@@ -116,7 +118,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
 void	set_texture(t_game *game);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*free*/
-int		free_exit(int EXIT, t_game *game, char *error, char **cur);
+void	free_exit(int EXIT, t_game *game, char *error, char **cur);
 void	free_all(t_game *game);
 void	fd_free_exit(int fd, t_game *game, char *error, char **cur);
 
