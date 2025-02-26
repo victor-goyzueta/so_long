@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 19:04:59 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:35:19 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,15 @@ typedef struct s_window
 
 typedef struct s_texture
 {
-	void	*wall;
+	void	*wall_cc;
+	void	*wall_cl;
+	void	*wall_cr;
+	void	*wall_dc;
+	void	*wall_dl;
+	void	*wall_dr;
+	void	*wall_uc;
+	void	*wall_ul;
+	void	*wall_ur;
 	void	*floor;
 	void	*item;
 	void	*player;
@@ -103,6 +111,7 @@ void	check_map_playable(t_game *game);
 /*init_utils*/
 void	load_texture_1(t_game *game);
 void	load_texture_2(t_game *game);
+void	load_texture_3(t_game *game);
 void	render_map(t_game *game);
 /*play_utils*/
 int		handle_keypress(int keycode, t_game *game);

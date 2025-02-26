@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 21:56:59 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:32:18 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	init(t_game *game)
 	set_texture(game);
 	load_texture_1(game);
 	load_texture_2(game);
+	load_texture_3(game);
 	game->window->new = mlx_new_window(game->mlx,
 			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
 	if (!game->window->new)

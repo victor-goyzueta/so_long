@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/25 23:30:22 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/26 01:02:46 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = src/main.c\
 	src/allocate_mem.c\
 	src/init_utils.c\
 	src/play_utils.c\
+	src/render_utils.c\
 	src/utils.c\
 	src/free_exit_utils.c\
 
