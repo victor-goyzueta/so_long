@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 21:00:52 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/26 01:14:46 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,24 @@ static void	free_texture(t_game *game)
 {
 	if (!game->texture)
 		return ;
-	if (game->texture->wall)
-		mlx_destroy_image(game->mlx, game->texture->wall);
+	if (game->texture->wall_cc)
+		mlx_destroy_image(game->mlx, game->texture->wall_cc);
+	if (game->texture->wall_cl)
+		mlx_destroy_image(game->mlx, game->texture->wall_cl);
+	if (game->texture->wall_cr)
+		mlx_destroy_image(game->mlx, game->texture->wall_cr);
+	if (game->texture->wall_dc)
+		mlx_destroy_image(game->mlx, game->texture->wall_dc);
+	if (game->texture->wall_dl)
+		mlx_destroy_image(game->mlx, game->texture->wall_dl);
+	if (game->texture->wall_dr)
+		mlx_destroy_image(game->mlx, game->texture->wall_dr);
+	if (game->texture->wall_uc)
+		mlx_destroy_image(game->mlx, game->texture->wall_uc);
+	if (game->texture->wall_ul)
+		mlx_destroy_image(game->mlx, game->texture->wall_ul);
+	if (game->texture->wall_ur)
+		mlx_destroy_image(game->mlx, game->texture->wall_ur);
 	if (game->texture->floor)
 		mlx_destroy_image(game->mlx, game->texture->floor);
 	if (game->texture->item)

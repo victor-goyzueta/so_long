@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-static void select_wall(t_game *game, int x, int y)
+static void select_wall(t_game *game, unsigned int x, unsigned int y)
 {
     if (!game)
         free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
