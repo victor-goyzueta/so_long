@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/26 00:32:18 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:23:13 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	check_map(char *file, t_game *game)
 	int	fd;
 
 	fd = 0;
-	if (!game)
-		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	if (!file || !*file)
+	if (!game || !file || !*file)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	game->map->matrix = NULL;
 	check_map_format(file, game);

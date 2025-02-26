@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/26 13:04:49 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/26 20:31:35 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,25 @@ void	allocate_matrix(t_game *game, int *fd)
 		free_exit(EXIT_FAILURE, game, FAIL_FD, NULL);
 	line = ft_strdup("");
 	if (!line)
-		fd_free_exit(*fd, game, FAIL_FD, NULL);
+		fd_free_exit(*fd, game, FAIL_ALLOC, NULL);
 	add = get_next_line(*fd);
 	if (!add)
-		fd_free_exit(*fd, game, FAIL_FD, &line);
+		fd_free_exit(*fd, game, FAIL_ALLOC, &line);
 	while (add)
 	{
 		line = ft_strjoin(line, add);
 		if (!line)
-			fd_free_exit(*fd, game, FAIL_FD, &add);
+			fd_free_exit(*fd, game, FAIL_ALLOC, &add);
 		free(add);
 		add = get_next_line(*fd);
 	}
+	/*test*/
+	ft_printf("%s\n", line);
+	/*end*/
 	game->map->matrix = ft_split(line, '\n');
 	free_arrays(2, line, add);
 	if (!game->map->matrix)
-		fd_free_exit(*fd, game, FAIL_FD, NULL);
+		fd_free_exit(*fd, game, FAIL_ALLOC, NULL);
 	close(*fd);
 }
 
