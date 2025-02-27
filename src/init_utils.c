@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 15:19:24 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:27:57 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	check_load_texture(t_game *game)
 {
-	if (!game->texture->player || !game->texture->close ||
-		!game->texture->item || !game->texture->floor ||
-		!game->texture->open || !game->texture->top ||
-		!game->texture->wall_cc || !game->texture->wall_cl ||
-		!game->texture->wall_cr || !game->texture->wall_dc ||
-		!game->texture->wall_dl || !game->texture->wall_dr ||
-		!game->texture->wall_uc || !game->texture->wall_ul ||
-		!game->texture->wall_ur)
+	if (!game->texture->player || !game->texture->close
+		|| !game->texture->item || !game->texture->floor
+		|| !game->texture->open || !game->texture->top
+		|| !game->texture->wall_cc || !game->texture->wall_cl
+		|| !game->texture->wall_cr || !game->texture->wall_dc
+		|| !game->texture->wall_dl || !game->texture->wall_dr
+		|| !game->texture->wall_uc || !game->texture->wall_ul
+		|| !game->texture->wall_ur)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 

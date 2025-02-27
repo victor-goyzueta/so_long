@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 15:25:04 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:28:57 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void	allocate_matrix(t_game *game, int *fd)
 		free(add);
 		add = get_next_line(*fd);
 	}
-	/*test*/
-	ft_printf("%s\n", line);
-	/*end*/
 	game->map->matrix = ft_split(line, '\n');
 	free_arrays(2, line, add);
 	if (!game->map->matrix)
