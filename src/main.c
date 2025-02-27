@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/26 20:23:13 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:13:19 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,6 @@ void	check_map(char *file, t_game *game)
 	check_map_playable(game);
 }
 
-static void	set_window(t_game *game)
-{
-	if (!game || !game->window)
-		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	game->window->new = NULL;
-	game->window->width = 0;
-	game->window->height = 0;
-	game->window->width = WIDTH;
-	game->window->height = HEIGHT;
-}
-
 void	init(t_game *game)
 {
 	if (!game)
@@ -52,6 +41,7 @@ void	init(t_game *game)
 	load_texture_1(game);
 	load_texture_2(game);
 	load_texture_3(game);
+	check_load_texture(game);
 	game->window->new = mlx_new_window(game->mlx,
 			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
 	if (!game->window->new)

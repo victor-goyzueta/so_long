@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/26 20:31:35 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:25:04 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,11 @@ void	allocate_object(t_game *game)
 	game->map->end = ft_calloc(1, sizeof(t_pos));
 	if (!game->map->end)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	game->map->row = 0;
+	game->map->col = 0;
 	game->map->count_collec = 0;
-	game->map->start->count = 0;
-	game->map->end->count = 0;
+	set_pos(game->map->start);
+	set_pos(game->map->end);
 }
 
 void	allocate_player(t_game *game)

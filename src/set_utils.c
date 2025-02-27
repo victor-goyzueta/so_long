@@ -1,0 +1,67 @@
+#include "so_long.h"
+
+void	set_pos(t_pos *object)
+{
+	if (!object)
+		return ;
+	object->count = 0;
+	object->x = 0;
+	object->y = 0;
+}
+
+void	set_window(t_game *game)
+{
+	if (!game || !game->window)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	game->window->new = NULL;
+	game->window->width = 0;
+	game->window->height = 0;
+	game->window->width = WIDTH;
+	game->window->height = HEIGHT;
+}
+
+void	set_texture(t_game *game)
+{
+	if (!game || !game->texture)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	game->texture->player = NULL;
+	game->texture->close = NULL;
+	game->texture->item = NULL;
+	game->texture->floor = NULL;
+	game->texture->open = NULL;
+	game->texture->top = NULL;
+	game->texture->wall_cc = NULL;
+	game->texture->wall_cl = NULL;
+	game->texture->wall_cr = NULL;
+	game->texture->wall_dc = NULL;
+	game->texture->wall_dl = NULL;
+	game->texture->wall_dr = NULL;
+	game->texture->wall_uc = NULL;
+	game->texture->wall_ul = NULL;
+	game->texture->wall_ur = NULL;
+}
+
+void	set_current(t_game *game, char *path, char *texture, char **current)
+{
+	if (!current || !*current)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	free(*current);
+	*current = NULL;
+	if (!game || !path || !*path || !texture || !*texture)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	*current = so_strjoin(path, texture);
+	if (!*current)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+}
+
+void	set_object(t_game *game, t_pos *object, int x, int y)
+{
+	(void)game;
+	if (!object)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	if (object->count != 0)
+		free_exit(EXIT_FAILURE, game, FAIL_COMP, NULL);
+	object->count = 1;
+	object->x = x;
+	object->y = y;
+}

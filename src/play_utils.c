@@ -6,13 +6,13 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:29:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/25 20:45:37 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:45:39 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	set_progress(t_game *game)
+static void	update_progress(t_game *game)
 {
 	int	x;
 	int	y;
@@ -26,7 +26,7 @@ static void	set_progress(t_game *game)
 		game->map->matrix[y][x] = 'F';
 }
 
-static void	set_render_pos(t_game *game, int x, int y)
+static void	update_render_pos(t_game *game, int x, int y)
 {
 	if (!game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
@@ -70,7 +70,7 @@ static void	move_player(t_game *game, int col, int row)
 	else if (game->map->matrix[new_y][new_x] == 'F')
 		free_exit(EXIT_SUCCESS, game, FAIL_ALLOC, NULL);
 	else if (game->map->matrix[new_y][new_x] == 'C')
-		set_progress(game);
+		update_progress(game);
 	if (game->map->matrix[y][x] == 'T')
 		game->map->matrix[y][x] = 'E';
 	else
@@ -79,14 +79,14 @@ static void	move_player(t_game *game, int col, int row)
 		game->map->matrix[new_y][new_x] = 'T';
 	else
 		game->map->matrix[new_y][new_x] = 'P';
-	set_render_pos(game, x, y);
-	set_render_pos(game, new_x, new_y);
+	update_render_pos(game, x, y);
+	update_render_pos(game, new_x, new_y);
 }
 
 int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == ESC || keycode == Q)
-		free_exit(EXIT_SUCCESS, game, "close_w", NULL);
+		free_exit(EXIT_SUCCESS, game, CLOSE_WIN, NULL);
 	else if (keycode == UP || keycode == W)
 		move_player(game, 0, -1);
 	else if (keycode == LEFT || keycode == A)
@@ -100,6 +100,6 @@ int	handle_keypress(int keycode, t_game *game)
 
 int	handle_exit(t_game *game)
 {
-	free_exit(EXIT_SUCCESS, game, "close_w", NULL);
+	free_exit(EXIT_SUCCESS, game, CLOSE_WIN, NULL);
 	return (0);
 }

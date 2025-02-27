@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/27 13:35:26 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/27 15:36:57 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,14 +29,15 @@ LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a
 MLX_FLAGS = -L library/minilibx-linux -lmlx -lXext -lX11
 
-SRCS = src/main.c\
-	src/allocate_mem.c\
-	src/check_map_utils.c\
-	src/init_utils.c\
-	src/play_utils.c\
-	src/render_utils.c\
-	src/utils.c\
-	src/free_exit_utils.c\
+SRCS =	src/main.c				\
+		src/allocate_mem.c		\
+		src/check_map_utils.c	\
+		src/init_utils.c		\
+		src/play_utils.c		\
+		src/render_utils.c		\
+		src/set_utils.c			\
+		src/utils.c				\
+		src/free_all_utils.c	\
 
 OBJ = $(SRCS:%.c=objs/%.o)
 	

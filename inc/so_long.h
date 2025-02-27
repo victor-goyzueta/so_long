@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/26 18:16:58 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:35:27 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define USAGE		"Usage: ./so_long [map_name.ber]"
 # define PATH_MAP	"assets/maps/"
 # define PATH_TEXT	"assets/textures/"
+# define CLOSE_WIN	"Closed window"
 # define FAIL_ALLOC	"Failed memory allocation"
 # define FAIL_COMP	"The composition of the map is incorrect"
 # define FAIL_RECT	"Map is not rectangular"
@@ -73,6 +74,12 @@ typedef struct s_window
 
 typedef struct s_texture
 {
+	void	*player;
+	void	*close;
+	void	*item;
+	void	*floor;
+	void	*open;
+	void	*top;
 	void	*wall_cc;
 	void	*wall_cl;
 	void	*wall_cr;
@@ -82,12 +89,6 @@ typedef struct s_texture
 	void	*wall_uc;
 	void	*wall_ul;
 	void	*wall_ur;
-	void	*floor;
-	void	*item;
-	void	*player;
-	void	*close;
-	void	*open;
-	void	*top;
 }	t_texture;
 
 typedef struct s_game
@@ -101,8 +102,8 @@ typedef struct s_game
 
 void	init(t_game *game);
 void	play(t_game *game);
-/*check_map*/
 void	check_map(char *file, t_game *game);
+/*check_map_utils*/
 void	check_map_format(char *file, t_game *game);
 void	check_map_rectangular(t_game *game);
 void	check_map_walls(t_game *game);
@@ -112,6 +113,7 @@ void	check_map_playable(t_game *game);
 void	load_texture_1(t_game *game);
 void	load_texture_2(t_game *game);
 void	load_texture_3(t_game *game);
+void	check_load_texture(t_game *game);
 void	render_map(t_game *game);
 /*play_utils*/
 int		handle_keypress(int keycode, t_game *game);
@@ -121,14 +123,20 @@ void	allocate_struct(t_game **game);
 void	allocate_matrix(t_game *game, int *fd);
 void	allocate_object(t_game *game);
 void	allocate_player(t_game *game);
+/*set_utils*/
+void	set_pos(t_pos *object);
+void	set_window(t_game *game);
+void	set_texture(t_game *game);
+void	set_object(t_game *game, t_pos *object, int x, int y);
+void	set_current(t_game *game, char *path, char *texture, char **current);
 /*utils*/
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
-void	set_object(t_game *game, t_pos *object, int x, int y);
-void	set_texture(t_game *game);
-void	set_current(t_game *game, char *path, char *texture, char **current);
-/*free*/
 void	free_exit(int EXIT, t_game *game, char *error, char **cur);
-void	free_all(t_game *game);
 void	fd_free_exit(int fd, t_game *game, char *error, char **cur);
+/*free_all_utils*/
+void	free_map(t_game *game);
+void	free_texture_1(t_game *game);
+void	free_texture_2(t_game *game);
+void	free_window(t_game *game);
 
 #endif
