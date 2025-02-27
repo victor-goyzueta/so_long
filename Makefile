@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/27 17:53:45 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/27 18:55:21 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I library/libft
 CFLAGS += -I library/minilibx-linux
 CFLAGS += -I inc
-CFLAGS += -g
 
 LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a
@@ -40,11 +39,11 @@ SRCS =	src/main.c				\
 		src/utils.c				\
 		src/free_all_utils.c	\
 
-OBJ = $(SRCS:%.c=objs/%.o)
+OBJ = $(SRCS:src/%.c=objs/%.o)
 	
 all: $(LIBFT) $(MINILIBX) $(NAME)
 
-$(NAME): objs $(OBJ)
+$(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)so_long ready$(WHITE)"
 
@@ -57,7 +56,7 @@ $(MINILIBX):
 objs:
 	@mkdir -p objs/src/
 
-objs/%.o: %.c
+objs/%.o: src/%.c | objs
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
