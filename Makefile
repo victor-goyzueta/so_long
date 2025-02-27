@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/02/26 01:02:46 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/02/27 13:35:26 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ MINILIBX = library/minilibx-linux/libmlx_Linux.a
 MLX_FLAGS = -L library/minilibx-linux -lmlx -lXext -lX11
 
 SRCS = src/main.c\
-	src/check_map.c\
 	src/allocate_mem.c\
+	src/check_map_utils.c\
 	src/init_utils.c\
 	src/play_utils.c\
 	src/render_utils.c\
