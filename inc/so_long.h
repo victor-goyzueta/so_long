@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 16:19:28 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:37:56 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ void	set_object(t_game *game, t_pos *object, int x, int y);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*utils*/
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
-void	free_exit(int EXIT, t_game *game, char *error, char **cur);
-void	fd_free_exit(int fd, t_game *game, char *error, char **cur);
+void	free_exit(int EXIT, t_game *game, char *message, char **cur);
+void	fd_free_exit(int fd, t_game *game, char *message, char **cur);
 /*free_all_utils*/
 void	free_map(t_game *game);
 void	free_texture_1(t_game *game);

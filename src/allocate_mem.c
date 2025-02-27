@@ -6,11 +6,38 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 17:28:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:00:41 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	check_matrix(t_game *game, char *line, int *fd)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	while (line[i])
+	{
+		count = 0;
+		while (line[i + count] && line[i + count] == '\n')
+			count++;
+		if (count > 1 && line[i + count] != '\0')
+		{
+			free(line);
+			fd_free_exit(*fd, game, FAIL_COMP, NULL);
+		}
+		i++;
+	}
+	game->map->matrix = ft_split(line, '\n');
+	if (!game->map->matrix)
+	{
+		free(line);
+		fd_free_exit(*fd, game, FAIL_ALLOC, NULL);
+	}
+	free(line);
+}
 
 void	allocate_matrix(t_game *game, int *fd)
 {
@@ -34,8 +61,7 @@ void	allocate_matrix(t_game *game, int *fd)
 		free(add);
 		add = get_next_line(*fd);
 	}
-	game->map->matrix = ft_split(line, '\n');
-	free_arrays(2, line, add);
+	check_matrix(game, line, fd);
 	if (!game->map->matrix)
 		fd_free_exit(*fd, game, FAIL_ALLOC, NULL);
 	close(*fd);
