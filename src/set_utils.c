@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:28:21 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 17:28:23 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/01 19:48:11 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	set_current(t_game *game, char *path, char *texture, char **current)
 
 void	set_object(t_game *game, t_pos *object, int x, int y)
 {
-	(void)game;
 	if (!object)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	if (object->count != 0)

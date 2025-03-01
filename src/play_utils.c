@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:29:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 17:14:41 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/01 19:50:28 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	update_render_pos(t_game *game, int x, int y)
 {
 	if (!game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	game->player->count++;
-	ft_printf("Movements: %u\n", game->player->count);
 	if (game->map->matrix[game->map->end->y][game->map->end->x] == 'F'
 		|| game->map->matrix[game->map->end->y][game->map->end->x] == '0')
 		mlx_put_image_to_window(game->mlx, game->window->new,
@@ -79,6 +77,8 @@ static void	move_player(t_game *game, int col, int row)
 		game->map->matrix[new_y][new_x] = 'P';
 	update_render_pos(game, game->player->x, game->player->y);
 	update_render_pos(game, new_x, new_y);
+	game->player->count++;
+	ft_printf("Movements: %u\n", game->player->count);
 }
 
 int	handle_keypress(int keycode, t_game *game)
