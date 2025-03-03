@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:51:35 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:19:47 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ void	display_moves_count(t_game *game)
 	count = ft_itoa((int)game->player->count);
 	if (!count)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	mlx_clear_window(game->mlx, game->window->new);
+	render_map(game);
 	mlx_string_put(game->mlx, game->window->new,
-		0 * WIDTH, (game->map->row - 1) * HEIGHT,
-		COLOR, "Movements: ");
-	mlx_string_put(game->mlx, game->window->new,
-		1 * WIDTH, (game->map->row - 1) * HEIGHT,
-		COLOR, count);
+		1 * WIDTH, (game->map->row) * HEIGHT, COLOR, count);
 	free(count);
 }
 

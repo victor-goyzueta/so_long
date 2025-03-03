@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/03/03 17:45:22 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/03/03 17:58:32 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,9 +24,9 @@ CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I library/libft
 CFLAGS += -I library/minilibx-linux
 
-INC = -I inc
+INC = -I inc/
 
-INC_BNS = -I bonus/inc
+INC_BNS = -I bonus/inc/
 
 LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a
@@ -53,8 +53,7 @@ SRCS_BNS =	bonus/src/main_bonus.c				\
 			bonus/src/free_all_utils_bonus.c	\
 
 OBJ = $(SRCS:src/%.c=objs/%.o)
-
-OBJ_BNS = $(SRCS_BNS:bonus/src/%.c=objs/%.o)
+OBJ_BNS = $(SRCS_BNS:bonus/src/%.c=objs_bns/%.o)
 
 	
 all: $(LIBFT) $(MINILIBX) $(NAME)
@@ -62,6 +61,10 @@ all: $(LIBFT) $(MINILIBX) $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)so_long ready$(WHITE)"
+
+bonus: $(LIBFT) $(MINILIBX) objs_bns $(OBJ_BNS)
+	@$(CC) $(CFLAGS) $(INC_BNS) $(OBJ_BNS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
+	@echo "$(GREEN)so_long_bonus ready$(WHITE)"
 
 $(LIBFT):
 	@make -C library/libft
@@ -72,16 +75,19 @@ $(MINILIBX):
 objs:
 	@mkdir -p objs/src/
 
-objs/%.o: src/%.c | objs
-	@$(CC) $(CFLAGS) -c $< -o $@
+objs_bns:
+	@mkdir -p objs_bns/src/
 
-objs_bns/%.o: bonus/src/%.c | objs
-	@$(CC) $(CFLAGS) -c $< -o $@
+objs/%.o: src/%.c | objs
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+objs_bns/%.o: bonus/src/%.c | objs_bns
+	@$(CC) $(CFLAGS) $(INC_BNS) -c $< -o $@
 
 clean:
 	@make clean -C library/libft
 	@make clean -C library/minilibx-linux
-	@rm -rf objs
+	@rm -rf objs objs_bns
 	@echo "Objetcs files deleted."
 
 fclean: clean
@@ -90,12 +96,6 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "Full clean completed"
 
-bonus: clean $(LIBFT) $(MINILIBX) $(NAME)
-	
-$(NAME): $(OBJ_BNS) $(LIBFT) $(MINILIBX)
-	@$(CC) $(CFLAGS) $(INC_BNS) $(OBJ_BNS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
-	@echo "$(GREEN)so_long_bonus ready$(WHITE)"
-
 re: fclean all
 
-.PHONY: all clean fclean re objs
+.PHONY: all bonus clean fclean re objs objs_bns
