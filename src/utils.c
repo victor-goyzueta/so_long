@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 00:01:48 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:14:41 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	free_all(t_game *game)
 
 void	free_exit(int EXIT, t_game *game, char *message, char **cur)
 {
+	if (game->mlx && game->window->new)
+		mlx_loop_end(game->window->new);
 	free_all(game);
 	if (cur)
 		free_array(cur);
