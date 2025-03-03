@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/03/02 23:51:38 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/03/03 17:45:22 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 CFLAGS += -I library/libft
 CFLAGS += -I library/minilibx-linux
-CFLAGS += -I inc
+
+INC = -I inc
+
+INC_BNS = -I bonus/inc
 
 LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a
@@ -39,13 +42,25 @@ SRCS =	src/main.c				\
 		src/utils.c				\
 		src/free_all_utils.c	\
 
+SRCS_BNS =	bonus/src/main_bonus.c				\
+			bonus/src/allocate_mem_bonus.c		\
+			bonus/src/check_map_utils_bonus.c	\
+			bonus/src/init_utils_bonus.c		\
+			bonus/src/play_utils_bonus.c		\
+			bonus/src/render_utils_bonus.c		\
+			bonus/src/set_utils_bonus.c			\
+			bonus/src/utils_bonus.c				\
+			bonus/src/free_all_utils_bonus.c	\
+
 OBJ = $(SRCS:src/%.c=objs/%.o)
+
+OBJ_BNS = $(SRCS_BNS:bonus/src/%.c=objs/%.o)
 
 	
 all: $(LIBFT) $(MINILIBX) $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)so_long ready$(WHITE)"
 
 $(LIBFT):
@@ -60,6 +75,9 @@ objs:
 objs/%.o: src/%.c | objs
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+objs_bns/%.o: bonus/src/%.c | objs
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	@make clean -C library/libft
 	@make clean -C library/minilibx-linux
@@ -71,6 +89,12 @@ fclean: clean
 	@make clean -C library/minilibx-linux
 	@rm -f $(NAME)
 	@echo "Full clean completed"
+
+bonus: clean $(LIBFT) $(MINILIBX) $(NAME)
+	
+$(NAME): $(OBJ_BNS) $(LIBFT) $(MINILIBX)
+	@$(CC) $(CFLAGS) $(INC_BNS) $(OBJ_BNS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
+	@echo "$(GREEN)so_long_bonus ready$(WHITE)"
 
 re: fclean all
 
