@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 02:19:59 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:50:33 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:53:40 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	select_wall_1(t_game *game, unsigned int x, unsigned int y)
 		mlx_put_image_to_window(game->mlx, game->window->new,
 			game->texture->wall_dl, x * WIDTH, y * HEIGHT);
 		mlx_string_put(game->mlx, game->window->new,
-			x *WIDTH, y *HEIGHT, COLOR, "Movements: ");
+			x * WIDTH, y * HEIGHT, COLOR, "Movements: ");
 	}
 	else if (y == game->map->row - 1 && x == game->map->col - 1)
 		mlx_put_image_to_window(game->mlx, game->window->new,

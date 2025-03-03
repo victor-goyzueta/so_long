@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:17:05 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:53:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ void	load_texture_4(t_game *game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	set_current(game, PATH_TEXT, "trap.xpm", &cur);
 	game->texture->trap = mlx_xpm_file_to_image(game->mlx, cur,
-		&(game->window->width), &(game->window->height));
+			&(game->window->width), &(game->window->height));
 	free(cur);
 }
