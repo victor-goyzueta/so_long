@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 02:19:59 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 19:18:36 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:19:43 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ void	render_map(t_game *game)
 		{
 			if (game->map->matrix[y][x] == 'B')
 				select_trap(game, x, y);
-			set_put_img_to_window(game, game->map->matrix[y][x], x, y);
+			else
+				set_put_img_to_window(game, game->map->matrix[y][x], x, y);
 			x++;
 		}
 		y++;
