@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 19:18:40 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:51:42 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check_map(char *file, t_game *game)
 {
@@ -67,6 +67,7 @@ int	main(int argc, char **argv)
 		ft_perror(USAGE);
 	allocate_struct(&game);
 	check_map(argv[1], game);
+	/*here*/
 	init(game);
 	play(game);
 }

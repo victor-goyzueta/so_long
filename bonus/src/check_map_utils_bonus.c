@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*   check_map_utils_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:42:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 15:36:38 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:44:52 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check_map_format(char *file, t_game *game)
 {
@@ -88,26 +88,26 @@ void	check_map_composition(t_game *game)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (game->map->matrix[y])
+	y = -1;
+	while (game->map->matrix[++y])
 	{
 		x = 0;
 		while (game->map->matrix[y][x] && game->map->matrix[y][x] != '\n')
 		{
 			if (game->map->matrix[y][x] == 'C')
 				game->map->count_collec += 1;
-			else if (game->map->matrix[y][x] == 'P')
-				set_object(game, game->map->start, x, y);
-			else if (game->map->matrix[y][x] == 'E')
-				set_object(game, game->map->end, x, y);
+			else if (game->map->matrix[y][x] == 'B')
+				game->map->count_trap += 1;
+			else if (game->map->matrix[y][x] == 'P'
+					|| game->map->matrix[y][x] == 'E')
+				set_object(game, game->map->matrix[y][x], x, y);
 			else if (game->map->matrix[y][x] != '1' &&
 				game->map->matrix[y][x] != '0')
 				free_exit(EXIT_FAILURE, game, FAIL_COMP, NULL);
 			x++;
 		}
-		y++;
 	}
-	if (game->map->count_collec < 1
+	if (game->map->count_collec < 1 || game->map->count_trap > TRAP_MAX
 		|| game->map->start->count != 1 || game->map->end->count != 1)
 		free_exit(EXIT_FAILURE, game, FAIL_COMP, NULL);
 }

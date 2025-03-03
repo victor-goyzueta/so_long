@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 00:14:41 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:51:14 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 {
@@ -20,7 +20,7 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 	if (loop > LOOP_MAX)
 		free_exit(EXIT_FAILURE, game, FAIL_SIZE, cpy);
 	if (x >= game->map->col || y >= game->map->row
-		|| cpy[y][x] == '1' || cpy[y][x] == 'F')
+		|| cpy[y][x] == '1' || cpy[y][x] == 'F' || cpy[y][x] == 'B')
 		return ;
 	if (cpy[y][x] == 'C')
 		game->map->count_collec--;

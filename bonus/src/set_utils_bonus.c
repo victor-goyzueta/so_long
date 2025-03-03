@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_utils.c                                        :+:      :+:    :+:   */
+/*   set_utils_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:28:21 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/01 19:48:11 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:35:56 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	set_pos(t_pos *object)
 {
@@ -66,13 +66,20 @@ void	set_current(t_game *game, char *path, char *texture, char **current)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 
-void	set_object(t_game *game, t_pos *object, int x, int y)
+void	set_object(t_game *game, char id, int x, int y)
 {
-	if (!object)
+	if (!game)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	if (object->count != 0)
-		free_exit(EXIT_FAILURE, game, FAIL_COMP, NULL);
-	object->count = 1;
-	object->x = x;
-	object->y = y;
+	if (id == 'P')
+	{
+		game->map->start->count++;
+		game->map->start->x = x;
+		game->map->start->y = y;
+	}
+	else
+	{
+		game->map->end->count++;
+		game->map->end->x = x;
+		game->map->end->y = y;
+	}
 }

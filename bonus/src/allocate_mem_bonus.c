@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate_mem.c                                     :+:      :+:    :+:   */
+/*   allocate_mem_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:25:25 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 18:00:41 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:25:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	check_matrix(t_game *game, char *line, int *fd)
 {
@@ -80,6 +80,7 @@ void	allocate_object(t_game *game)
 	game->map->row = 0;
 	game->map->col = 0;
 	game->map->count_collec = 0;
+	game->map->count_trap = 0;
 	set_pos(game->map->start);
 	set_pos(game->map->end);
 }
