@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:44:38 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:53:21 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	init(t_game *game)
 			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long_bonus");
 	if (!game->window->new)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	render_map(game);
 	allocate_player(game);
+	render_map(game);
 }
 
 void	play(t_game *game)

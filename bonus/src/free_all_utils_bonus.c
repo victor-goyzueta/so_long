@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 18:14:51 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:42:52 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:52:14 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ void	free_texture_2(t_game *game)
 		mlx_destroy_image(game->mlx, game->texture->open);
 	if (game->texture->top)
 		mlx_destroy_image(game->mlx, game->texture->top);
-	if (game->texture->trap)
-		mlx_destroy_image(game->mlx, game->texture->trap);
+	if (game->texture->trap_1)
+		mlx_destroy_image(game->mlx, game->texture->trap_1);
+	if (game->texture->trap_2)
+		mlx_destroy_image(game->mlx, game->texture->trap_2);
 	set_texture(game);
 	free(game->texture);
 }

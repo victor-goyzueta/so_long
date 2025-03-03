@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:50:54 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:40:01 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ typedef struct s_texture
 	void	*floor;
 	void	*open;
 	void	*top;
-	void	*trap;
+	void	*trap_1;
+	void	*trap_2;
 	void	*wall_cc;
 	void	*wall_cl;
 	void	*wall_cr;

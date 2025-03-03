@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:28:21 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:44:18 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:41:26 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	set_texture(t_game *game)
 	game->texture->floor = NULL;
 	game->texture->open = NULL;
 	game->texture->top = NULL;
-	game->texture->trap = NULL;
+	game->texture->trap_1 = NULL;
+	game->texture->trap_2 = NULL;
 	game->texture->wall_cc = NULL;
 	game->texture->wall_cl = NULL;
 	game->texture->wall_cr = NULL;

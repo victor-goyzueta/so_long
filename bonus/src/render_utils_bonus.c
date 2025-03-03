@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 02:19:59 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 18:04:31 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 19:18:36 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,21 @@ static void	set_put_img_to_window(t_game *game, char id, int x, int y)
 			game->texture->open, x * WIDTH, y * HEIGHT);
 }
 
+static void	select_trap(t_game *game, int x, int y)
+{
+	if (!game)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	if ((game->player->y == (y - 1) && game->player->x == x)
+		|| (game->player->y == (y + 1) && game->player->x == x)
+		|| (game->player->y == y && game->player->x == (x - 1))
+		|| (game->player->y == y && game->player->x == (x + 1)))
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->trap_2, x * WIDTH, y * HEIGHT);
+	else
+		mlx_put_image_to_window(game->mlx, game->window->new,
+			game->texture->trap_1, x * WIDTH, y * HEIGHT);
+}
+
 void	render_map(t_game *game)
 {
 	unsigned int	x;
@@ -93,8 +108,7 @@ void	render_map(t_game *game)
 		while (x < game->map->col)
 		{
 			if (game->map->matrix[y][x] == 'B')
-				mlx_put_image_to_window(game->mlx, game->window->new,
-					game->texture->trap, x * WIDTH, y * HEIGHT);
+				select_trap(game, x, y);
 			set_put_img_to_window(game, game->map->matrix[y][x], x, y);
 			x++;
 		}

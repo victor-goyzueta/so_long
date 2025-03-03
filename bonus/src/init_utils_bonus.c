@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 16:53:20 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:42:32 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	check_load_texture(t_game *game)
 		|| !game->texture->wall_cr || !game->texture->wall_dc
 		|| !game->texture->wall_dl || !game->texture->wall_dr
 		|| !game->texture->wall_uc || !game->texture->wall_ul
-		|| !game->texture->wall_ur || !game->texture->trap)
+		|| !game->texture->wall_ur || !game->texture->trap_1
+		|| !game->texture->trap_2)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 
@@ -119,8 +120,11 @@ void	load_texture_4(t_game *game)
 	cur = ft_strdup("");
 	if (!cur)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
-	set_current(game, PATH_TEXT, "trap.xpm", &cur);
-	game->texture->trap = mlx_xpm_file_to_image(game->mlx, cur,
+	set_current(game, PATH_TEXT, "trap_1.xpm", &cur);
+	game->texture->trap_1 = mlx_xpm_file_to_image(game->mlx, cur,
+			&(game->window->width), &(game->window->height));
+	set_current(game, PATH_TEXT, "trap_2.xpm", &cur);
+	game->texture->trap_2 = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
 	free(cur);
 }
