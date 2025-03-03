@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_utils.c                                       :+:      :+:    :+:   */
+/*   init_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 17:00:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 17:27:57 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:17:05 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	check_load_texture(t_game *game)
 {
@@ -21,7 +21,7 @@ void	check_load_texture(t_game *game)
 		|| !game->texture->wall_cr || !game->texture->wall_dc
 		|| !game->texture->wall_dl || !game->texture->wall_dr
 		|| !game->texture->wall_uc || !game->texture->wall_ul
-		|| !game->texture->wall_ur)
+		|| !game->texture->wall_ur || !game->texture->trap)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 }
 
@@ -106,5 +106,21 @@ void	load_texture_3(t_game *game)
 	set_current(game, PATH_TEXT, "wall_ur.xpm", &cur);
 	game->texture->wall_ur = mlx_xpm_file_to_image(game->mlx, cur,
 			&(game->window->width), &(game->window->height));
+	free(cur);
+}
+
+void	load_texture_4(t_game *game)
+{
+	char	*cur;
+
+	if (!game)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	cur = NULL;
+	cur = ft_strdup("");
+	if (!cur)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	set_current(game, PATH_TEXT, "trap.xpm", &cur);
+	game->texture->trap = mlx_xpm_file_to_image(game->mlx, cur,
+		&(game->window->width), &(game->window->height));
 	free(cur);
 }

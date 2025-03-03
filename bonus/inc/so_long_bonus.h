@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 18:13:31 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 15:33:42 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:50:54 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define TRAP_MAX	42
 # define WIDTH 		64
 # define HEIGHT 	64
+
+# define COLOR	0
 
 # define CLIC_X 17
 # define ESC 	65307
@@ -116,6 +118,7 @@ void	check_map_playable(t_game *game);
 void	load_texture_1(t_game *game);
 void	load_texture_2(t_game *game);
 void	load_texture_3(t_game *game);
+void	load_texture_4(t_game *game);
 void	check_load_texture(t_game *game);
 void	render_map(t_game *game);
 /*play_utils*/
@@ -134,6 +137,7 @@ void	set_object(t_game *game, char id, int x, int y);
 void	set_current(t_game *game, char *path, char *texture, char **current);
 /*utils*/
 void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y);
+void	display_moves_count(t_game *game);
 void	free_exit(int EXIT, t_game *game, char *message, char **cur);
 void	fd_free_exit(int fd, t_game *game, char *message, char **cur);
 /*free_all_utils*/

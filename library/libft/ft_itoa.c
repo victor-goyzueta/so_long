@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 21:49:47 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2024/12/27 21:50:31 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:34:15 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("-2147483648"));
 	if (n == 0)
 	{
-		str = malloc(2);
+		str = ft_calloc(2, sizeof(char));
 		if (!str)
 			return (NULL);
 		str[0] = '0';
@@ -66,7 +66,7 @@ char	*ft_itoa(int n)
 		return (str);
 	}
 	len = count_digits(n);
-	str = malloc(len + 1);
+	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	fill_str(str, n, len);

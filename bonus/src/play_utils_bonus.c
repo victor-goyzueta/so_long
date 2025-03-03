@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play_utils.c                                       :+:      :+:    :+:   */
+/*   play_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 19:29:04 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/01 19:50:28 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:36:23 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	update_progress(t_game *game)
 {
@@ -62,6 +62,8 @@ static void	move_player(t_game *game, int col, int row)
 	new_y = ft_abs(game->player->y + row);
 	if (game->map->matrix[new_y][new_x] == '1')
 		return ;
+	else if (game->map->matrix[new_y][new_x] == 'B')
+		free_exit(EXIT_SUCCESS, game, "You lose", NULL);
 	else if ((new_y == game->map->end->y && new_x == game->map->end->x)
 		&& game->map->count_collec == 0)
 		free_exit(EXIT_SUCCESS, game, FAIL_ALLOC, NULL);
@@ -77,8 +79,7 @@ static void	move_player(t_game *game, int col, int row)
 		game->map->matrix[new_y][new_x] = 'P';
 	update_render_pos(game, game->player->x, game->player->y);
 	update_render_pos(game, new_x, new_y);
-	game->player->count++;
-	ft_printf("Movements: %u\n", game->player->count);
+	display_moves_count(game);
 }
 
 int	handle_keypress(int keycode, t_game *game)

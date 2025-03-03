@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:12:46 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 15:51:14 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:51:35 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,26 @@ void	flood_fill(t_game *game, char **cpy, unsigned int x, unsigned int y)
 	flood_fill(game, cpy, x, y + 1);
 	flood_fill(game, cpy, x - 1, y);
 	flood_fill(game, cpy, x, y - 1);
+}
+
+void	display_moves_count(t_game *game)
+{
+	char	*count;
+
+	count = NULL;
+	if (!game)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	game->player->count++;
+	count = ft_itoa((int)game->player->count);
+	if (!count)
+		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
+	mlx_string_put(game->mlx, game->window->new,
+		0 * WIDTH, (game->map->row - 1) * HEIGHT,
+		COLOR, "Movements: ");
+	mlx_string_put(game->mlx, game->window->new,
+		1 * WIDTH, (game->map->row - 1) * HEIGHT,
+		COLOR, count);
+	free(count);
 }
 
 static void	free_all(t_game *game)
@@ -67,6 +87,8 @@ void	free_exit(int EXIT, t_game *game, char *message, char **cur)
 	{
 		if (ft_strncmp(message, CLOSE_WIN, 7) == 0)
 			ft_printf("Closed window\n");
+		else if (ft_strncmp(message, "You lose", 8) == 0)
+			ft_printf("You lose\n");
 		else
 			ft_printf("Successfully completed\n");
 		exit(EXIT);

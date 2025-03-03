@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:28:21 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/01 19:48:11 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:45:08 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	set_window(t_game *game)
 	game->window->new = NULL;
 	game->window->width = 0;
 	game->window->height = 0;
-	game->window->width = WIDTH;
-	game->window->height = HEIGHT;
 }
 
 void	set_texture(t_game *game)

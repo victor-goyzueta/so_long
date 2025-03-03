@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/03/03 15:51:42 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:44:38 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,16 @@ void	init(t_game *game)
 	if (!game->mlx)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	set_window(game);
+	game->window->width = WIDTH;
+	game->window->height = HEIGHT;
 	set_texture(game);
 	load_texture_1(game);
 	load_texture_2(game);
 	load_texture_3(game);
+	load_texture_4(game);
 	check_load_texture(game);
 	game->window->new = mlx_new_window(game->mlx,
-			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long");
+			game->map->col * WIDTH, game->map->row * HEIGHT, "so_long_bonus");
 	if (!game->window->new)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	render_map(game);
@@ -67,7 +70,6 @@ int	main(int argc, char **argv)
 		ft_perror(USAGE);
 	allocate_struct(&game);
 	check_map(argv[1], game);
-	/*here*/
 	init(game);
 	play(game);
 }

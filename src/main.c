@@ -6,7 +6,7 @@
 /*   By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:07:54 by vgoyzuet          #+#    #+#             */
-/*   Updated: 2025/02/27 19:18:40 by vgoyzuet         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:45:20 by vgoyzuet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	init(t_game *game)
 	if (!game->mlx)
 		free_exit(EXIT_FAILURE, game, FAIL_ALLOC, NULL);
 	set_window(game);
+	game->window->width = WIDTH;
+	game->window->height = HEIGHT;
 	set_texture(game);
 	load_texture_1(game);
 	load_texture_2(game);
