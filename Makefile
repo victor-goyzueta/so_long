@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/03/04 18:37:33 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/03/04 18:39:16 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,8 +77,6 @@ $(MINILIBX_DIR):
 		echo "📥 Descargando MiniLibX..."; \
 		rm -rf $(MINILIBX_DIR); \
 		git clone $(MINILIBX_REPO) $(MINILIBX_DIR); \
-	else \
-		echo "✅ MiniLibX ya está presente"; \
 	fi
 
 $(MINILIBX): $(MINILIBX_DIR)
