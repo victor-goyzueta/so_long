@@ -6,7 +6,7 @@
 #    By: vgoyzuet <vgoyzuet@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/10 18:08:21 by vgoyzuet          #+#    #+#              #
-#    Updated: 2025/03/04 18:39:16 by vgoyzuet         ###   ########.fr        #
+#    Updated: 2025/03/04 19:01:26 by vgoyzuet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,6 @@ INC_BNS = -I bonus/inc/
 LIBFT = library/libft/libft.a
 MINILIBX = library/minilibx-linux/libmlx_Linux.a
 MLX_FLAGS = -L library/minilibx-linux -lmlx -lXext -lX11
-
-MINILIBX_DIR = library/minilibx-linux
-MINILIBX_REPO = https://github.com/42Paris/minilibx-linux.git
 
 SRCS =	src/main.c				\
 		src/allocate_mem.c		\
@@ -65,22 +62,15 @@ $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)so_long ready$(WHITE)"
 
-bonus: clean $(LIBFT) $(MINILIBX) objs_bns $(OBJ_BNS)
+bonus: $(LIBFT) $(MINILIBX) objs_bns $(OBJ_BNS)
 	@$(CC) $(CFLAGS) $(INC_BNS) $(OBJ_BNS) $(LIBFT) $(MINILIBX) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)so_long_bonus ready$(WHITE)"
 
 $(LIBFT):
 	@make -C library/libft
-	
-$(MINILIBX_DIR):
-	@if [ ! -d "$(MINILIBX_DIR)/" ] || [ -z "$$(ls -A $(MINILIBX_DIR))" ]; then \
-		echo "📥 Descargando MiniLibX..."; \
-		rm -rf $(MINILIBX_DIR); \
-		git clone $(MINILIBX_REPO) $(MINILIBX_DIR); \
-	fi
 
-$(MINILIBX): $(MINILIBX_DIR)
-	@make -C $(MINILIBX_DIR) --silent > /dev/null 2>&1
+$(MINILIBX):
+	@make -C library/minilibx-linux --silent > /dev/null 2>&1
 
 objs:
 	@mkdir -p objs/src/
