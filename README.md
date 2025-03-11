@@ -1,6 +1,6 @@
 # so_long
 
-![so_long](so_long_v1.gif)
+![so_long](so_long.gif)
 
 ## Objetivo general de `so_long`
 
