@@ -172,7 +172,7 @@ void move_player(t_game *game, int col, int row)
 }
 ```
 
-Debemos ser capaces de darle movimiento a nuestro personaje principal y renderizar nuevamente el mapa, o los sprites afectados para mejor optimización de recursos.
+Debemos ser capaces de darle movimiento a nuestro personaje principal y renderizar nuevamente el mapa, o los sprites afectados para mejor la optimización de recursos.
 
 
 
@@ -182,7 +182,7 @@ El programa debe cerrarse limpiamente en los siguientes casos:
 
 \- Al clicar sobre la x de la ventana.
 
-\- Al presionar la tecla \`ESC\`
+\- Al presionar la tecla **`ESC`**
 
 \- Al entrar en contacto con un enemigo o trampa.
 
